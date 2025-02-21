@@ -1,0 +1,1 @@
+export const FETCH_RECIPE_FAILED = "Failed to fetch to Recipe"

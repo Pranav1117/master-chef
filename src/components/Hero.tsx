@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const Hero = () => {
   return (
-    <div className="relative w-[90%] h-[90vh] mx-auto mt-4 bg-cover bg-center bg-[url('/images/HeroSectionImage.webp')]">
+    <div className="relative w-[90%] h-[90vh] mx-auto bg-cover bg-center bg-[url('/images/HeroSectionImage.webp')]">
       <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent"></div>
 
       <div className="relative top-[45%] left-20 text-white z-10 w-[90%]">

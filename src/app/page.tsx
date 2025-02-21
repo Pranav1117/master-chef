@@ -1,12 +1,14 @@
 import Image from "next/image";
 import * as Components from "../components";
-import Cravings from "@/components/craving/Cravings";
+import { ToastContainer } from "react-toastify";
 
 export default function Home() {
   return (
-    <div className="flex flec-col">
+    <div className="flex flex-col gap-12">
+      <ToastContainer />
       <Components.HeroSection />
-      <Cravings/>
+      <Components.Cravings />
+      <Components.ExploreMore />
     </div>
   );
 }
