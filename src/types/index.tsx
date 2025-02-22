@@ -227,3 +227,8 @@ export interface Recipes {
   recipe: RecipeProp;
   _links?: LinkProp;
 }
+
+export interface CardProps {
+  title: string;
+  image: string; // Assuming image is a URL string
+}

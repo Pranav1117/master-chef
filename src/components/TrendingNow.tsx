@@ -1,17 +1,17 @@
 "use client";
 import { fetchRecipes } from "@/services/recipes";
 import { useEffect, useState } from "react";
-import { CircularCard } from "./Cards";
+import { SquareCard } from "./Cards";
 import { Recipes } from "@/types";
 
-const ExploreMore = () => {
+const TrendinNow = () => {
   const [recipes, setRecipes] = useState<Recipes[] | null>(null);
   const [loading, setLoading] = useState(false);
 
   const getRecipes = async () => {
     setLoading(true);
     try {
-      const data = await fetchRecipes("explore");
+      const data = await fetchRecipes("trending");
       const recipes = data?.hits;
       setRecipes(recipes);
     } finally {
@@ -29,11 +29,11 @@ const ExploreMore = () => {
 
   return (
     <div className="w-[90%] mx-auto">
-      <div className="text-4xl">EXPLORE MORE</div>
+      <div className="text-4xl">TRENDING NOW</div>
       <div className="flex gap-10 mt-4">
-        {recipes?.slice(0, 5).map((item, index: number) => {
+        {recipes?.slice(0, 4).map((item, index: number) => {
           return (
-            <CircularCard
+            <SquareCard
               key={index}
               title={item.recipe.label}
               image={item.recipe.image}
@@ -45,4 +45,4 @@ const ExploreMore = () => {
   );
 };
 
-export default ExploreMore;
+export default TrendinNow;

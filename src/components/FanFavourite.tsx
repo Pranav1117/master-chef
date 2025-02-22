@@ -1,17 +1,17 @@
 "use client";
 import { fetchRecipes } from "@/services/recipes";
 import { useEffect, useState } from "react";
-import { CircularCard } from "./Cards";
+import { SquareCard } from "./Cards";
 import { Recipes } from "@/types";
 
-const ExploreMore = () => {
+const FanFavourite = () => {
   const [recipes, setRecipes] = useState<Recipes[] | null>(null);
   const [loading, setLoading] = useState(false);
 
   const getRecipes = async () => {
     setLoading(true);
     try {
-      const data = await fetchRecipes("explore");
+      const data = await fetchRecipes("favourite");
       const recipes = data?.hits;
       setRecipes(recipes);
     } finally {
@@ -29,11 +29,11 @@ const ExploreMore = () => {
 
   return (
     <div className="w-[90%] mx-auto">
-      <div className="text-4xl">EXPLORE MORE</div>
-      <div className="flex gap-10 mt-4">
-        {recipes?.slice(0, 5).map((item, index: number) => {
+      <div className="text-4xl">FAN FAVOURITE</div>
+      <div className="flex justify-between gap-10 mt-4 flex-wrap w-full">
+        {recipes?.slice(0, 16).map((item, index: number) => {
           return (
-            <CircularCard
+            <SquareCard
               key={index}
               title={item.recipe.label}
               image={item.recipe.image}
@@ -45,4 +45,4 @@ const ExploreMore = () => {
   );
 };
 
-export default ExploreMore;
+export default FanFavourite;

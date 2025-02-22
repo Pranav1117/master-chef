@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
-import * as Icons from "../components/icons";
 import { Inter } from "next/font/google";
+import * as Icons from "../components/icons";
 const inter = Inter({ subsets: ["latin"], weight: "400" });
 
 const Navbar = () => {

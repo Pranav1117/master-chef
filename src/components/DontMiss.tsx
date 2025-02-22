@@ -1,17 +1,17 @@
 "use client";
 import { fetchRecipes } from "@/services/recipes";
 import { useEffect, useState } from "react";
-import { CircularCard } from "./Cards";
+import { BottomFadeSquareCard } from "./Cards";
 import { Recipes } from "@/types";
 
-const ExploreMore = () => {
+const DontMiss = () => {
   const [recipes, setRecipes] = useState<Recipes[] | null>(null);
   const [loading, setLoading] = useState(false);
 
   const getRecipes = async () => {
     setLoading(true);
     try {
-      const data = await fetchRecipes("explore");
+      const data = await fetchRecipes("unique");
       const recipes = data?.hits;
       setRecipes(recipes);
     } finally {
@@ -29,20 +29,14 @@ const ExploreMore = () => {
 
   return (
     <div className="w-[90%] mx-auto">
-      <div className="text-4xl">EXPLORE MORE</div>
+      <div className="text-4xl">DON'T MISS</div>
       <div className="flex gap-10 mt-4">
-        {recipes?.slice(0, 5).map((item, index: number) => {
-          return (
-            <CircularCard
-              key={index}
-              title={item.recipe.label}
-              image={item.recipe.image}
-            />
-          );
+        {recipes?.slice(0, 3).map((item, index: number) => {
+          return <BottomFadeSquareCard key={index} recipe={item.recipe} />;
         })}
       </div>
     </div>
   );
 };
 
-export default ExploreMore;
+export default DontMiss;
