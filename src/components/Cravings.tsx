@@ -29,7 +29,10 @@ const Cravings = () => {
 
   return (
     <div className="w-[90%] mx-auto">
-      <div className="text-4xl">WHAT WE'RE CRAVING</div>
+      <div className= "flex justify-between text-4xl items-center">
+        <p>WHAT WE'RE CRAVING</p>
+        <a className="text-blue-500 text-sm cursor-pointer">VIEW ALL</a>
+      </div>
       <div className="flex gap-10 mt-4">
         {cravingRecipes?.slice(0, 3).map((item, index: number) => {
           return <BottomFadeSquareCard key={index} recipe={item.recipe} />;

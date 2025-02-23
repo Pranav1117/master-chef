@@ -6,7 +6,6 @@ import { FiMail } from "react-icons/fi";
 import { IoArrowUpOutline } from "react-icons/io5";
 
 const Footer = () => {
-
   return (
     <div className="flex flex-col gap-4 lg:flex-row justify-between items-start md:items-center bg-gray-900 text-white text-sm px-12 py-4">
       <div className="">

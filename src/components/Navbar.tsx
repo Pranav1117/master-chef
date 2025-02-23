@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Inter } from "next/font/google";
 import * as Icons from "../components/icons";
 const inter = Inter({ subsets: ["latin"], weight: "400" });
@@ -8,15 +9,19 @@ const inter = Inter({ subsets: ["latin"], weight: "400" });
 const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState(null);
   const [showMenu, setShowMenu] = useState(false);
-
+  const router = useRouter();
   const menuRef = useRef(null);
 
-  const toggleMenu = (index:number) => {
+  const toggleMenu = (index: number) => {
     setActiveMenu(activeMenu === index ? null : index);
   };
 
   const handleToggleMenu = () => {
     setShowMenu(!showMenu);
+  };
+
+  const navigateSearchPage = () => {
+    router.push("/search")
   };
 
   useEffect(() => {
@@ -178,7 +183,7 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="w-full bg-black text-white px-10 py-2 flex justify-between items-center">
+    <div className="w-full bg-black text-white px-10 py-2 flex justify-between items-center z-10 h-[10vh">
       <div className="flex items-center gap-20 cursor-pointer">
         <div className="flex gap-4 items-center">
           <button onClick={handleToggleMenu} className="p-2">
@@ -254,9 +259,15 @@ const Navbar = () => {
 
       <div>
         <div className="flex gap-4">
-          <Icons.SearchIcon />
-          <Icons.BookmarkIcon />
-          <Icons.ProfileIcon />
+          <button onClick={navigateSearchPage}>
+            <Icons.SearchIcon />
+          </button>
+          <button onClick={navigateSearchPage}>
+            <Icons.BookmarkIcon />
+          </button>
+          <button onClick={navigateSearchPage}>
+            <Icons.ProfileIcon />
+          </button>
         </div>
       </div>
     </div>

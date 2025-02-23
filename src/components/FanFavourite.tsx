@@ -29,7 +29,10 @@ const FanFavourite = () => {
 
   return (
     <div className="w-[90%] mx-auto">
-      <div className="text-4xl">FAN FAVOURITE</div>
+      <div className= "flex justify-between items-center text-4xl">
+        <p>FAN FAVOURITE</p>
+        <a className="text-blue-500 text-sm cursor-pointer">VIEW ALL</a>
+      </div>
       <div className="flex justify-between gap-10 mt-4 flex-wrap w-full">
         {recipes?.slice(0, 16).map((item, index: number) => {
           return (

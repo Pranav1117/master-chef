@@ -14,7 +14,6 @@ export default function Home() {
       <Components.MoreIdeas />
       <Components.SecondaryHeroSection/>
       <Components.FanFavourite/>
-      <Components.Footer/>
     </div>
   );
 }
