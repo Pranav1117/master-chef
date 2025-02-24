@@ -3,6 +3,7 @@ import { fetchRecipes } from "@/services/recipes";
 import { useEffect, useState } from "react";
 import { CircularCard } from "./Cards";
 import { Recipes } from "@/types";
+import Link from "next/link";
 
 const ExploreMore = () => {
   const [recipes, setRecipes] = useState<Recipes[] | null>(null);
@@ -29,18 +30,24 @@ const ExploreMore = () => {
 
   return (
     <div className="w-[90%] mx-auto">
-      <div className= "flex justify-between items-center text-4xl">
+      <div className="flex justify-between items-center text-4xl">
         <p>EXPLORE MORE</p>
         <a className="text-blue-500 text-sm cursor-pointer">VIEW ALL</a>
       </div>
       <div className="flex gap-10 mt-4">
         {recipes?.slice(0, 5).map((item, index: number) => {
           return (
-            <CircularCard
-              key={index}
-              title={item.recipe.label}
-              image={item.recipe.image}
-            />
+            <div className="w-full">
+              <Link
+                href={`recipedetail/${encodeURIComponent(item.recipe.label)}`}
+              >
+                <CircularCard
+                  key={index}
+                  title={item.recipe.label}
+                  image={item.recipe.image}
+                />
+              </Link>
+            </div>
           );
         })}
       </div>

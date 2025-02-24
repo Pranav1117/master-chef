@@ -37,9 +37,11 @@ const Cravings = () => {
       <div className="flex gap-10 mt-4">
         {cravingRecipes?.slice(0, 3).map((item, index: number) => {
           return (
+            <div className="w-full">
             <Link href={`recipedetail/${encodeURIComponent(item.recipe.label)}`}>
                 <BottomFadeSquareCard key={index} recipe={item.recipe} />;
             </Link>
+            </div>
           ) 
         })}
       </div>

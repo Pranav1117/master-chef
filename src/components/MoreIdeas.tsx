@@ -3,6 +3,7 @@ import { fetchRecipes } from "@/services/recipes";
 import { useEffect, useState } from "react";
 import { SquareCard } from "./Cards";
 import { Recipes } from "@/types";
+import Link from "next/link";
 
 const MoreIdeas = () => {
   const [recipes, setRecipes] = useState<Recipes[] | null>(null);
@@ -29,18 +30,24 @@ const MoreIdeas = () => {
 
   return (
     <div className="w-[90%] mx-auto">
-      <div className= "flex justify-between items-center text-4xl">
+      <div className="flex justify-between items-center text-4xl">
         <p>MORE IDEAS</p>
         <a className="text-blue-500 text-sm cursor-pointer">VIEW ALL</a>
       </div>
       <div className="flex gap-10 mt-4">
         {recipes?.slice(0, 4).map((item, index: number) => {
           return (
-            <SquareCard
-              key={index}
-              title={item.recipe.label}
-              image={item.recipe.image}
-            />
+            <div className="w-full">
+              <Link
+                href={`recipedetail/${encodeURIComponent(item.recipe.label)}`}
+              >
+                <SquareCard
+                  key={index}
+                  title={item.recipe.label}
+                  image={item.recipe.image}
+                />
+              </Link>
+            </div>
           );
         })}
       </div>

@@ -3,6 +3,7 @@ import { fetchRecipes } from "@/services/recipes";
 import { useEffect, useState } from "react";
 import { SquareCard } from "./Cards";
 import { Recipes } from "@/types";
+import Link from "next/link";
 
 const FanFavourite = () => {
   const [recipes, setRecipes] = useState<Recipes[] | null>(null);
@@ -29,18 +30,24 @@ const FanFavourite = () => {
 
   return (
     <div className="w-[90%] mx-auto">
-      <div className= "flex justify-between items-center text-4xl">
+      <div className="flex justify-between items-center text-4xl">
         <p>FAN FAVOURITE</p>
         <a className="text-blue-500 text-sm cursor-pointer">VIEW ALL</a>
       </div>
       <div className="flex justify-between gap-10 mt-4 flex-wrap w-full">
         {recipes?.slice(0, 16).map((item, index: number) => {
           return (
-            <SquareCard
-              key={index}
-              title={item.recipe.label}
-              image={item.recipe.image}
-            />
+            <div className="w-[22%] flex ">
+              <Link
+                href={`recipedetail/${encodeURIComponent(item.recipe.label)}`}
+              >
+                <SquareCard
+                  key={index}
+                  title={item.recipe.label}
+                  image={item.recipe.image}
+                />
+              </Link>
+            </div>
           );
         })}
       </div>

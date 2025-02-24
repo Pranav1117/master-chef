@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { fetchRecipes } from "@/services/recipes";
 import { useEffect, useState } from "react";
 import { BottomFadeSquareCard } from "./Cards";
@@ -29,13 +30,21 @@ const DontMiss = () => {
 
   return (
     <div className="w-[90%] mx-auto">
-     <div className= "flex justify-between items-center text-4xl">
+      <div className="flex justify-between items-center text-4xl">
         <p>DON'T MISS</p>
         <a className="text-blue-500 text-sm cursor-pointer">VIEW ALL</a>
       </div>
       <div className="flex gap-10 mt-4">
         {recipes?.slice(0, 3).map((item, index: number) => {
-          return <BottomFadeSquareCard key={index} recipe={item.recipe} />;
+          return (
+            <div className="w-full">
+              <Link
+                href={`recipedetail/${encodeURIComponent(item.recipe.label)}`}
+              >
+                <BottomFadeSquareCard key={index} recipe={item.recipe} />;
+              </Link>
+            </div>
+          );
         })}
       </div>
     </div>
