@@ -2,9 +2,10 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Inter } from "next/font/google";
+import { Outfit } from "next/font/google";
 import * as Icons from "../components/icons";
-const inter = Inter({ subsets: ["latin"], weight: "400" });
+
+const inter = Outfit({ subsets: ["latin"], weight: "400" });
 
 const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState(null);
@@ -263,7 +264,7 @@ const Navbar = () => {
             <Icons.SearchIcon />
           </button>
           <button onClick={navigateSearchPage}>
-            <Icons.BookmarkIcon />
+            <Icons.BookMarkIcon.Save />
           </button>
           <button onClick={navigateSearchPage}>
             <Icons.ProfileIcon />

@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { Footer } from "@/components";
+
+const outfit = Outfit({ subsets: ["latin"], weight: "400" });
 
 export const metadata: Metadata = {
   title: "Master Chef",
@@ -15,11 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className={`${outfit.className}`}>
         <Navbar />
-        <div className="overflow-y-auto min-h-[80vh]">
-        {children}
-        </div>
+        <div className="overflow-y-auto min-h-[80vh]">{children}</div>
         <Footer />
       </body>
     </html>

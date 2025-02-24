@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { fetchRecipes } from "@/services/recipes";
 import { useEffect, useState } from "react";
 import { BottomFadeSquareCard } from "./Cards";
@@ -35,7 +36,11 @@ const Cravings = () => {
       </div>
       <div className="flex gap-10 mt-4">
         {cravingRecipes?.slice(0, 3).map((item, index: number) => {
-          return <BottomFadeSquareCard key={index} recipe={item.recipe} />;
+          return (
+            <Link href={`recipedetail/${encodeURIComponent(item.recipe.label)}`}>
+                <BottomFadeSquareCard key={index} recipe={item.recipe} />;
+            </Link>
+          ) 
         })}
       </div>
     </div>

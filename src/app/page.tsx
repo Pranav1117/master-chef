@@ -1,4 +1,3 @@
-import Image from "next/image";
 import * as Components from "../components";
 import { ToastContainer } from "react-toastify";
 
