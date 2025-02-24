@@ -16,9 +16,9 @@ const BottomFadeSquareCard: React.FC<Recipes> = ({ recipe }) => {
 
       <div className="absolute bottom-4 left-4 z-10 text-white p-2">
         <p className="text-lg font-light">COLLECTION</p>
-        <h2 className="text-3xl font-bold h-[30px]">
+        <h2 className="text-3xl">
           {recipe?.label.length > 20
-            ? `${recipe.label.slice(0, 60)}...`
+            ? `${recipe.label.slice(0, 40)}...`
             : recipe.label}
         </h2>
       </div>

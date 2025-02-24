@@ -32,7 +32,9 @@ const ExploreMore = () => {
     <div className="w-[90%] mx-auto">
       <div className="flex justify-between items-center text-4xl">
         <p>EXPLORE MORE</p>
-        <a className="text-blue-500 text-sm cursor-pointer">VIEW ALL</a>
+        <div className="text-blue-500 text-sm cursor-pointer">
+          <Link href={`recipelist/explore`}>VIEW ALL</Link>
+        </div>
       </div>
       <div className="flex gap-10 mt-4">
         {recipes?.slice(0, 5).map((item, index: number) => {

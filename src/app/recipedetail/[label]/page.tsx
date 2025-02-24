@@ -1,7 +1,7 @@
 "use client";
+import { useEffect, useState } from "react";
 import { notFound } from "next/navigation";
 import * as Icons from "../../../components/icons";
-import { useEffect, useState } from "react";
 import { fetchRecipes } from "@/services/recipes";
 import { Recipes } from "@/types";
 import { DIRECTIONS } from "../../../constants";
@@ -16,9 +16,10 @@ const RecipeDetail = ({ params }: { params: { label: string } }) => {
   const getRecipeDetails = async () => {
     setLoading(true);
     try {
-      const data = await fetchRecipes("cravings");
+      const data = await fetchRecipes(
+        decodeURIComponent(label).split(" ").join()
+      );
       const detail = data?.hits[0];
-      console.log(detail);
       setRecipeDetail(detail);
     } finally {
       setLoading(false);
@@ -71,42 +72,33 @@ const RecipeDetail = ({ params }: { params: { label: string } }) => {
                 </div>
               </div>
             </div>
-
-            {/* Qoute */}
-            {/* <div className="">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquam
-              architecto saepe repudiandae unde inventore consequatur
-              cupiditate, fuga provident, sequi a, quibusdam at adipisci
-              nesciunt tenetur? Nam ipsam officiis rem dolore.
-            </div> */}
-
             {/* images */}
-              <div className="w-full">
-                <img className="w-full" src={recipeDetail?.recipe.image} alt="as" />
-              </div>
+            <div className="w-full h-[600px]">
+              <img
+                className="w-full h-full"
+                src={recipeDetail?.recipe.images.LARGE.url}
+                alt="as"
+              />
+            </div>
 
-            <div className="flex gap-10">
+            <div className="flex gap-10 justify-between">
               {/* Directions container */}
-              <div>
+              <div className="w-[60%]">
                 <h3 className="text-xl">DIRECTIONS</h3>
                 <ol className="space-y-6 mt-4 list-inside list-decimal">
                   {DIRECTIONS.map((step, index) => {
-                    return (
-                        <li>{step}</li>
-                    );
+                    return <li>{step}</li>;
                   })}
                 </ol>
               </div>
               {/* Ingredients component */}
-              <div >
+              <div className="w-[30%]">
                 <h3 className="text-xl">INGREDIENTS</h3>
                 <ul className="space-y-6 mt-4 list-outside list-disc">
                   {recipeDetail &&
                     recipeDetail?.recipe.ingredientLines?.map(
                       (ingredients, index) => {
-                        return (
-                            <li>{ingredients}</li>
-                        );
+                        return <li>{ingredients}</li>;
                       }
                     )}
                 </ul>
@@ -124,7 +116,11 @@ const RecipeDetail = ({ params }: { params: { label: string } }) => {
         </div>
 
         <div className="h-[100vh] w-[20%] bg-red-100 mt-4 ">
-          <img src="/images/advertise.webp" alt="advertisement" className="h-[100%] "/>
+          <img
+            src="/images/advertise.webp"
+            alt="advertisement"
+            className="h-[100%] "
+          />
         </div>
       </div>
     </div>

@@ -30,19 +30,23 @@ const Cravings = () => {
 
   return (
     <div className="w-[90%] mx-auto">
-      <div className= "flex justify-between text-4xl items-center">
+      <div className="flex justify-between text-4xl items-center">
         <p>WHAT WE'RE CRAVING</p>
-        <a className="text-blue-500 text-sm cursor-pointer">VIEW ALL</a>
+        <div className="text-blue-500 text-sm cursor-pointer">
+          <Link href={`recipelist/cravings`}>VIEW ALL</Link>
+        </div>
       </div>
       <div className="flex gap-10 mt-4">
         {cravingRecipes?.slice(0, 3).map((item, index: number) => {
           return (
             <div className="w-full">
-            <Link href={`recipedetail/${encodeURIComponent(item.recipe.label)}`}>
-                <BottomFadeSquareCard key={index} recipe={item.recipe} />;
-            </Link>
+              <Link
+                href={`recipedetail/${encodeURIComponent(item.recipe.label)}`}
+              >
+                <BottomFadeSquareCard key={index} recipe={item.recipe} />
+              </Link>
             </div>
-          ) 
+          );
         })}
       </div>
     </div>
