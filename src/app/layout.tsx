@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${outfit.className}`}>
         <Navbar />
-        <div className="overflow-y-auto min-h-[80vh]">{children}</div>
+        <div className="min-h-[80vh]">{children}</div>
         <Footer />
       </body>
     </html>

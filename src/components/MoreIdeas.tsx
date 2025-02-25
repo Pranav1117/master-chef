@@ -1,9 +1,9 @@
 "use client";
-import { fetchRecipes } from "@/services/recipes";
+import Link from "next/link";
 import { useEffect, useState } from "react";
+import { fetchRecipes } from "@/services/recipes";
 import { SquareCard } from "./Cards";
 import { Recipes } from "@/types";
-import Link from "next/link";
 
 const MoreIdeas = () => {
   const [recipes, setRecipes] = useState<Recipes[] | null>(null);
@@ -39,7 +39,7 @@ const MoreIdeas = () => {
       <div className="flex gap-10 mt-4">
         {recipes?.slice(0, 4).map((item, index: number) => {
           return (
-            <div className="w-full">
+            <div className="w-full" key={index}> 
               <Link
                 href={`recipedetail/${encodeURIComponent(item.recipe.label)}`}
               >

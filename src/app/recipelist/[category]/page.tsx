@@ -44,7 +44,7 @@ const RecipeList = ({ params }: { params: { category: string } }) => {
       {/* body */}
       <div className=" bg-gray-100 mt-6">
         <div className="flex w-[79%] mx-auto justify-between pt-12">
-          <div>
+          <div className="w-[70%]">
             {recipeList?.map((recipe, index) => {
               return (
                 <ListCard
@@ -57,7 +57,7 @@ const RecipeList = ({ params }: { params: { category: string } }) => {
           </div>
 
           {/* ad container */}
-          <div className="h-[100vh] w-[35%] bg-red-100 mt-4 ">
+          <div className="h-[100vh] w-[25%] bg-red-100 mt-4 ">
             <img
               src="/images/advertise.webp"
               alt="advertisement"

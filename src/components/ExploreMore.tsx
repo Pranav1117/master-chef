@@ -1,9 +1,9 @@
 "use client";
-import { fetchRecipes } from "@/services/recipes";
+import Link from "next/link";
 import { useEffect, useState } from "react";
+import { fetchRecipes } from "@/services/recipes";
 import { CircularCard } from "./Cards";
 import { Recipes } from "@/types";
-import Link from "next/link";
 
 const ExploreMore = () => {
   const [recipes, setRecipes] = useState<Recipes[] | null>(null);
@@ -24,10 +24,6 @@ const ExploreMore = () => {
     getRecipes();
   }, []);
 
-  if (loading) {
-    return <p> loading......</p>;
-  }
-
   return (
     <div className="w-[90%] mx-auto">
       <div className="flex justify-between items-center text-4xl">
@@ -37,21 +33,35 @@ const ExploreMore = () => {
         </div>
       </div>
       <div className="flex gap-10 mt-4">
-        {recipes?.slice(0, 5).map((item, index: number) => {
-          return (
-            <div className="w-full">
-              <Link
-                href={`recipedetail/${encodeURIComponent(item.recipe.label)}`}
-              >
-                <CircularCard
-                  key={index}
-                  title={item.recipe.label}
-                  image={item.recipe.image}
-                />
-              </Link>
+        {loading ? (
+          [...Array(5)].map((_, index) => (
+            <div className="w-full" key={index}>
+              <CircularCard title="" image="" loading={true} />
             </div>
-          );
-        })}
+          ))
+        ) : recipes ? (
+          recipes?.slice(0, 5).map((item, index: number) => {
+            return (
+              <div className="w-full" key={index}>
+                <Link
+                  href={`recipedetail/${encodeURIComponent(item.recipe.label)}`}
+                >
+                  <CircularCard
+                    key={index}
+                    title={item.recipe.label}
+                    image={item.recipe.image}
+                    loading={loading}
+                  />
+                </Link>
+              </div>
+            );
+          })
+        ) : (
+          // TODO => add something with this msg like img or gif
+          <div className="w-[100%] h-[200px] border border-gray-200 text-center leading-[200px] text-xl">
+            No Data available
+          </div>
+        )}
       </div>
     </div>
   );

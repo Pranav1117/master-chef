@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
-import { fetchRecipes } from "@/services/recipes";
 import { useEffect, useState } from "react";
+import { fetchRecipes } from "@/services/recipes";
 import { BottomFadeSquareCard } from "./Cards";
 import { Recipes } from "@/types";
 
@@ -24,10 +24,6 @@ const Cravings = () => {
     getCravingRecipes();
   }, []);
 
-  if (loading) {
-    return <p> loading......</p>;
-  }
-
   return (
     <div className="w-[90%] mx-auto">
       <div className="flex justify-between text-4xl items-center">
@@ -37,17 +33,33 @@ const Cravings = () => {
         </div>
       </div>
       <div className="flex gap-10 mt-4">
-        {cravingRecipes?.slice(0, 3).map((item, index: number) => {
-          return (
-            <div className="w-full">
-              <Link
-                href={`recipedetail/${encodeURIComponent(item.recipe.label)}`}
-              >
-                <BottomFadeSquareCard key={index} recipe={item.recipe} />
-              </Link>
+        {loading ? (
+          [...Array(3)].map((_, index) => (
+            <div className="w-full" key={index}>
+              <BottomFadeSquareCard title="" image="" loading={true} />
             </div>
-          );
-        })}
+          ))
+        ) : cravingRecipes ? (
+          cravingRecipes?.slice(0, 3).map((item, index: number) => {
+            return (
+              <div className="w-full" key={index}>
+                <Link
+                  href={`recipedetail/${encodeURIComponent(item.recipe.label)}`}
+                >
+                  <BottomFadeSquareCard
+                    key={index}
+                    title={item.recipe.label}
+                    image={item.recipe.image}
+                    loading={loading}
+                  />
+                </Link>
+              </div>
+            );
+          })
+        ) : (
+          // TODO => add something with this msg like img or gif
+          <div className="w-[100%] h-[200px] border border-gray-200 text-center leading-[200px] text-xl">No Data available</div>
+        )}
       </div>
     </div>
   );

@@ -16,9 +16,8 @@ const RecipeDetail = ({ params }: { params: { label: string } }) => {
   const getRecipeDetails = async () => {
     setLoading(true);
     try {
-      const data = await fetchRecipes(
-        decodeURIComponent(label).split(" ").join()
-      );
+
+      const data = await fetchRecipes(decodeURIComponent(label).split(" ").join());
       const detail = data?.hits[0];
       setRecipeDetail(detail);
     } finally {
@@ -72,14 +71,11 @@ const RecipeDetail = ({ params }: { params: { label: string } }) => {
                 </div>
               </div>
             </div>
+
             {/* images */}
-            <div className="w-full h-[600px]">
-              <img
-                className="w-full h-full"
-                src={recipeDetail?.recipe.images.LARGE.url}
-                alt="as"
-              />
-            </div>
+              <div className="w-full h-[600px]">
+                <img className="w-full h-full" src={recipeDetail?.recipe.images.LARGE.url} alt="as" />
+              </div>
 
             <div className="flex gap-10 justify-between">
               {/* Directions container */}
@@ -87,7 +83,9 @@ const RecipeDetail = ({ params }: { params: { label: string } }) => {
                 <h3 className="text-xl">DIRECTIONS</h3>
                 <ol className="space-y-6 mt-4 list-inside list-decimal">
                   {DIRECTIONS.map((step, index) => {
-                    return <li>{step}</li>;
+                    return (
+                        <li>{step}</li>
+                    );
                   })}
                 </ol>
               </div>
@@ -98,7 +96,9 @@ const RecipeDetail = ({ params }: { params: { label: string } }) => {
                   {recipeDetail &&
                     recipeDetail?.recipe.ingredientLines?.map(
                       (ingredients, index) => {
-                        return <li>{ingredients}</li>;
+                        return (
+                            <li>{ingredients}</li>
+                        );
                       }
                     )}
                 </ul>
@@ -116,11 +116,7 @@ const RecipeDetail = ({ params }: { params: { label: string } }) => {
         </div>
 
         <div className="h-[100vh] w-[20%] bg-red-100 mt-4 ">
-          <img
-            src="/images/advertise.webp"
-            alt="advertisement"
-            className="h-[100%] "
-          />
+          <img src="/images/advertise.webp" alt="advertisement" className="h-[100%] "/>
         </div>
       </div>
     </div>
