@@ -1,17 +1,25 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
 import { Outfit } from "next/font/google";
+import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import * as Icons from "../components/icons";
+import { menuItems } from "@/constants";
+import SignIn from "@/app/auth/signin/page";
+import { signIn } from "next-auth/react";
 
 const inter = Outfit({ subsets: ["latin"], weight: "400" });
 
+// TODO => check types error in this file
 const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState(null);
+  const [showAvatarMenu, setShowAvatarMenu] = useState(false);
+  // state to handle mobile toggle menu
   const [showMenu, setShowMenu] = useState(false);
+  const [showLogInPopup, setShowLogInPopUp] = useState(false);
   const router = useRouter();
   const menuRef = useRef(null);
+  const avatarMenuRef = useRef(null);
 
   const toggleMenu = (index: number) => {
     setActiveMenu(activeMenu === index ? null : index);
@@ -22,13 +30,24 @@ const Navbar = () => {
   };
 
   const navigateSearchPage = () => {
-    router.push("/search")
+    router.push("/search");
+  };
+
+  const toggleAvatarMenu = () => {
+    setShowAvatarMenu(!showAvatarMenu);
   };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
         setActiveMenu(null);
+      }
+      // Check why avatar menu is not getting close if clicked outside
+      if (
+        avatarMenuRef.current &&
+        !avatarMenuRef.current.contains(event.target)
+      ) {
+        setShowAvatarMenu(false);
       }
     };
 
@@ -37,151 +56,7 @@ const Navbar = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
-  const menuItems = [
-    {
-      title: "Recipes",
-      submenu: [
-        {
-          title: "Breakfast & Brunch Recipes",
-          path: "/recipes/breakfast-brunch",
-        },
-        { title: "Lunch Recipes", path: "/recipes/lunch" },
-        {
-          title: "Appetizers & Snack Recipes",
-          path: "/recipes/appetizers-snacks",
-        },
-        { title: "Dinner Recipes", path: "/recipes/dinner" },
-        { title: "Dessert Recipes", path: "/recipes/desserts" },
-        { title: "Side Dish Recipes", path: "/recipes/side-dishes" },
-        { title: "Grilling & BBQ Recipes", path: "/recipes/grilling-bbq" },
-        { title: "Microwave Recipes", path: "/recipes/microwave" },
-        { title: "Quick & Easy Recipes", path: "/recipes/quick-easy" },
-        { title: "Slow-Cooker Recipes", path: "/recipes/slow-cooker" },
-        { title: "Air Fryer Recipes", path: "/recipes/air-fryer" },
-        { title: "Instant Pot Recipes", path: "/recipes/instant-pot" },
-        { title: "Baking Recipes", path: "/recipes/baking" },
-      ],
-    },
-    {
-      title: "Popular",
-      submenu: [
-        { title: "Trending Now", path: "/recipes/trending" },
-        { title: "Casserole Recipes", path: "/recipes/casserole" },
-        { title: "Chili Recipes", path: "/recipes/chili" },
-        { title: "Soup Recipes", path: "/recipes/soup" },
-        { title: "Pasta Recipes", path: "/recipes/pasta" },
-        { title: "Bread Recipes", path: "/recipes/bread" },
-        { title: "Cookie Recipes", path: "/recipes/cookies" },
-        { title: "Salad Recipes", path: "/recipes/salad" },
-        { title: "Tofu Recipes", path: "/recipes/tofu" },
-        { title: "Copycat Recipes", path: "/recipes/copycat" },
-      ],
-    },
-    {
-      title: "Meat & Seafood",
-      submenu: [
-        { title: "Chicken Recipes", path: "/recipes/chicken" },
-        { title: "Salmon Recipes", path: "/recipes/salmon" },
-        { title: "Pork Chop Recipes", path: "/recipes/pork" },
-        { title: "Ground Beef Recipes", path: "/recipes/beef" },
-        { title: "Shrimp Recipes", path: "/recipes/shrimp" },
-      ],
-    },
-    {
-      title: "Healthy & Diet",
-      submenu: [
-        { title: "Keto Recipes", path: "/recipes/keto" },
-        { title: "Healthy Recipes", path: "/recipes/healthy" },
-        {
-          title: "Vegetarian Recipes",
-          path: "/recipes/vegetarian",
-        },
-        { title: "Vegan Recipes", path: "/recipes/vegan" },
-        {
-          title: "Mediterranean Diet Recipes",
-          path: "/recipes/mediterranean",
-        },
-        {
-          title: "Weight Watchers Recipes",
-          path: "/recipes/weight-watchers",
-        },
-        { title: "Low-Carb Recipes", path: "/recipes/low-carb" },
-        {
-          title: "Gluten-Free Recipes",
-          path: "/recipes/gluten-free",
-        },
-      ],
-    },
-    {
-      title: "Holidays",
-      submenu: [
-        {
-          title: "Dinner Party Recipes",
-          path: "/recipes/dinner-party",
-        },
-        { title: "Game Day Recipes", path: "/recipes/game-day" },
-        {
-          title: "Valentine's Day Recipes",
-          path: "/recipes/valentines-day",
-        },
-        {
-          title: "St. Patrick's Day Recipes",
-          path: "/recipes/st-patricks-day",
-        },
-        { title: "Easter Recipes", path: "/recipes/easter" },
-        {
-          title: "Cinco de Mayo Recipes",
-          path: "/recipes/cinco-de-mayo",
-        },
-        {
-          title: "Mother's Day Recipes",
-          path: "/recipes/mothers-day",
-        },
-        {
-          title: "Memorial Day Recipes",
-          path: "/recipes/memorial-day",
-        },
-        { title: "Juneteenth Recipes", path: "/recipes/juneteenth" },
-        { title: "4th of July Recipes", path: "/recipes/4th-of-july" },
-        { title: "Halloween Recipes", path: "/recipes/halloween" },
-        {
-          title: "Thanksgiving Recipes",
-          path: "/recipes/thanksgiving",
-        },
-        { title: "Hanukkah Recipes", path: "/recipes/hanukkah" },
-        { title: "Christmas Recipes", path: "/recipes/christmas" },
-        { title: "New Year's Recipes", path: "/recipes/new-years" },
-      ],
-    },
-    {
-      title: "Cuisine",
-      submenu: [
-        { title: "Mexican Recipes", path: "/recipes/mexican" },
-        { title: "Italian Recipes", path: "/recipes/italian" },
-        { title: "Indian Recipes", path: "/recipes/indian" },
-        { title: "Thai Recipes", path: "/recipes/thai" },
-        { title: "Korean Recipes", path: "/recipes/korean" },
-        { title: "French Recipes", path: "/recipes/french" },
-        {
-          title: "Latin American Recipes",
-          path: "/recipes/latin-american",
-        },
-        { title: "Chinese Recipes", path: "/recipes/chinese" },
-        { title: "Japanese Recipes", path: "/recipes/japanese" },
-        { title: "Spanish Recipes", path: "/recipes/spanish" },
-      ],
-    },
-    {
-      title: "Seasonal",
-      submenu: [
-        { title: "Spring Recipes", path: "/recipes/spring" },
-        { title: "Summer Recipes", path: "/recipes/summer" },
-        { title: "Fall Recipes", path: "/recipes/fall" },
-        { title: "Winter Recipes", path: "/recipes/winter" },
-      ],
-    },
-  ];
+  // TODO => move menuItems to constant
 
   return (
     <div className="w-full bg-black text-white px-10 py-2 flex justify-between items-center z-10 h-[10vh">
@@ -190,6 +65,7 @@ const Navbar = () => {
           <button onClick={handleToggleMenu} className="p-2">
             {showMenu ? <Icons.CrossIcon /> : <Icons.HamburgerIcon />}
           </button>
+          {/* mobile menu */}
           {showMenu && (
             <div
               className="absolute top-14 left-0 w-[400px] bg-black xl:hidden justify-between px-4"
@@ -223,7 +99,6 @@ const Navbar = () => {
               ))}
             </div>
           )}
-
           <Link
             href="/"
             className={`text-2xl font-bold cursor-pointer ${inter.className}`}
@@ -243,13 +118,14 @@ const Navbar = () => {
                   onMouseEnter={() => setActiveMenu(index)}
                 >
                   {item.submenu.map((sub, subIndex) => (
-                    <a
+                    <Link
+                      onClick={() => setActiveMenu(null)}
                       key={subIndex}
                       href={sub.path}
                       className="block px-4 py-2 hover:bg-gray-700"
                     >
                       {sub.title}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               )}
@@ -266,11 +142,49 @@ const Navbar = () => {
           <button onClick={navigateSearchPage}>
             <Icons.BookMarkIcon.Save />
           </button>
-          <button onClick={navigateSearchPage}>
+          <button onClick={toggleAvatarMenu}>
             <Icons.ProfileIcon />
           </button>
+          {showAvatarMenu ? (
+            <div
+              className="z-50 flex flex-col gap-4 p-4 absolute top-14 right-[1%] bg-black"
+              ref={avatarMenuRef}
+            >
+              <Link href="/profile">
+                <div className="cursor-pointer ">Profile</div>
+              </Link>
+              <Link href="/addrecipe">
+                <div className="cursor-pointer ">Add Recipe</div>
+              </Link>
+              <Link href="/">
+                <div className="cursor-pointer ">Log out</div>
+              </Link>
+              <button onClick={()=>signIn()}>
+                <div className="cursor-pointer ">Log In</div>
+              </button>
+            </div>
+          ) : null}
         </div>
       </div>
+      {/* {showLogInPopup && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-md w-[400px]">
+            <h2 className="text-xl font-bold text-center mb-4">Sign In</h2>
+            <button
+              onClick={() => SignIn()}
+              className="w-full bg-red-500 text-white p-2 rounded-md"
+            >
+              Sign in with Google
+            </button>
+            <button
+              onClick={() => setShowLogInPopUp(false)}
+              className="mt-4 w-full bg-gray-300 text-black p-2 rounded-md"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )} */}
     </div>
   );
 };

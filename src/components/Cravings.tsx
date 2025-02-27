@@ -36,7 +36,7 @@ const Cravings = () => {
         {loading ? (
           [...Array(3)].map((_, index) => (
             <div className="w-full" key={index}>
-              <BottomFadeSquareCard title="" image="" loading={true} />
+              <BottomFadeSquareCard title="" image="" loading={loading} />
             </div>
           ))
         ) : cravingRecipes ? (

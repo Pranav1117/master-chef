@@ -230,7 +230,7 @@ export interface Recipes {
 
 export interface CardProps {
   title: string;
-  image: string; // Assuming image is a URL string
+  image: string;
   source?: string;
   loading?: boolean;
 }

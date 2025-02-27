@@ -37,21 +37,35 @@ const MoreIdeas = () => {
         </div>
       </div>
       <div className="flex gap-10 mt-4">
-        {recipes?.slice(0, 4).map((item, index: number) => {
-          return (
-            <div className="w-full" key={index}> 
-              <Link
-                href={`recipedetail/${encodeURIComponent(item.recipe.label)}`}
-              >
-                <SquareCard
-                  key={index}
-                  title={item.recipe.label}
-                  image={item.recipe.image}
-                />
-              </Link>
+        {loading ? (
+          [...Array(4)].map((_, index) => (
+            <div className="w-full" key={index}>
+              <SquareCard title="" image="" loading={true} />
             </div>
-          );
-        })}
+          ))
+        ) : recipes ? (
+          recipes?.slice(0, 4).map((item, index: number) => {
+            return (
+              <div className="w-full" key={index}>
+                <Link
+                  href={`recipedetail/${encodeURIComponent(item.recipe.label)}`}
+                >
+                  <SquareCard
+                    key={index}
+                    title={item.recipe.label}
+                    image={item.recipe.image}
+                    loading={loading}
+                  />
+                </Link>
+              </div>
+            );
+          })
+        ) : (
+          // TODO => add something with this msg like img or gif
+          <div className="w-[100%] h-[200px] border border-gray-200 text-center leading-[200px] text-xl">
+            No Data available
+          </div>
+        )}
       </div>
     </div>
   );

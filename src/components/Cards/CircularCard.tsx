@@ -11,7 +11,6 @@ const CircularCard: React.FC<CardProps> = ({
         <div className="flex flex-col justify-between w-full gap-4 items-center">
           <div className="h-[180px] w-[180px] bg-gray-200 animate-pulse rounded-full"></div>
           <div className=" bg-gray-100 h-[15px] w-[140px] animate-pulse">
-            {/* {title.length > 20 ? `${title.slice(0, 20)}...` : title} */}
           </div>
         </div>
       ) : (

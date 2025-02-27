@@ -1,7 +1,17 @@
+"use client";
+import { useRouter } from "next/navigation";
+
 const SecondaryHeroSection = () => {
+  const router = useRouter();
+
   return (
     <div className="flex border-2 border-gray-100 rounded w-[90%] mx-auto">
-      <div className="w-[65%] cursor-pointer">
+      <div
+        className="w-[65%] cursor-pointer"
+        onClick={() => {
+          router.push("/recipelist/pumpkin");
+        }}
+      >
         <img src="/images/HeroSectionImage.webp" alt="Pumpkin Recipes" />
       </div>
       <div className="w-[35%] py-14 px-6 space-y-4">

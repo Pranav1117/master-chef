@@ -1,7 +1,7 @@
-const RecipeDetails = () => {
+const Profile = () => {
   return (
-    <div>RecipeDetails</div>
+    <div>Profile</div>
   )
 }
 
-export default RecipeDetails
+export default Profile
