@@ -3,6 +3,7 @@ import { Outfit } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { Footer } from "@/components";
+import { Providers } from "./providers";
 
 const outfit = Outfit({ subsets: ["latin"], weight: "400" });
 
@@ -19,9 +20,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${outfit.className}`}>
-        <Navbar />
-        <div className="min-h-[80vh]">{children}</div>
-        <Footer />
+        <Providers>
+          <Navbar />
+          <div className="min-h-[80vh]">{children}</div>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
