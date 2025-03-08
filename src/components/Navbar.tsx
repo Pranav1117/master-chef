@@ -1,12 +1,11 @@
 "use client";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Outfit } from "next/font/google";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useSession, signOut } from "next-auth/react";
 import * as Icons from "../components/icons";
 import { menuItems } from "@/constants";
-import SignIn from "@/app/auth/signin/page";
-import { signIn, useSession } from "next-auth/react";
 
 const inter = Outfit({ subsets: ["latin"], weight: "400" });
 
@@ -14,15 +13,14 @@ const inter = Outfit({ subsets: ["latin"], weight: "400" });
 const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState(null);
   const [showAvatarMenu, setShowAvatarMenu] = useState(false);
+  
   // state to handle mobile toggle menu
   const [showMenu, setShowMenu] = useState(false);
-  const [showLogInPopup, setShowLogInPopUp] = useState(false);
   const router = useRouter();
   const menuRef = useRef(null);
   const avatarMenuRef = useRef(null);
   const { data } = useSession();
-
-  console.log("session", data);
+  // @ts-ignore
 
   const toggleMenu = (index: number) => {
     setActiveMenu(activeMenu === index ? null : index);
@@ -154,7 +152,7 @@ const Navbar = () => {
             >
               {/* TODO => check following ts ignore */}
               {/* @ts-ignore */}
-              {Object.keys(data?.user) > 0 ? (
+              {data?.user?.id ? (
                 <>
                   <Link href="/profile">
                     <div className="cursor-pointer ">Profile</div>
@@ -162,17 +160,18 @@ const Navbar = () => {
                   <Link href="/addrecipe">
                     <div className="cursor-pointer ">Add Recipe</div>
                   </Link>
-                  <Link href="/">
+                  <Link href="/" onClick={() => signOut({ callbackUrl: "/" })}>
                     <div className="cursor-pointer ">Log out</div>
                   </Link>
-                  <Link href="/auth/signin">
-                    <div className="cursor-pointer ">Log In</div>
-                  </Link>
+                 
                 </>
               ) : (
-                <Link href="/profile">
-                  <div className="cursor-pointer ">Sign Up</div>
-                </Link>
+                // <Link href="/auth/signup">
+                //   <div className="cursor-pointer ">Sign Up</div>
+                // </Link>
+                 <Link href="/auth/signin">
+                 <div className="cursor-pointer ">Log In</div>
+               </Link>
               )}
             </div>
           ) : null}

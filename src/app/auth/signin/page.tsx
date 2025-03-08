@@ -16,15 +16,6 @@ const SignIn = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-    console.log(user);
-
-    // const response = await prisma.user.create({
-    //   data: {
-    //     email: user.email,
-    //     password: user.password,
-    //   },
-    // });
-    // console.log(response);
     const result = await signIn("credentials", {
       redirect: false,
       email: user.email,
