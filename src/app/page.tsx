@@ -11,8 +11,9 @@ export default function Home() {
       <Components.TrendingNow />
       <Components.DontMiss />
       <Components.MoreIdeas />
-      <Components.SecondaryHeroSection/>
-      <Components.FanFavourite/>
+      <Components.SecondaryHeroSection />
+      <Components.FanFavourite />
+      <Components.UserRecipes />
     </div>
   );
 }

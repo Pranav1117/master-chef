@@ -3,14 +3,12 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { IconBrandGoogle } from "@tabler/icons-react";
-import { PrismaClient } from "@prisma/client";
 import { Label } from "../../../components/ui/label";
 import { Input } from "../../../components/ui/input";
 import { cn } from "@/lib/utils";
-import { createUser } from "@/app/actions/signup";
+import { createUser } from "@/app/actions/actions";
 
 export default function SignupFormDemo() {
-  const prisma = new PrismaClient();
   const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
@@ -26,6 +24,8 @@ export default function SignupFormDemo() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      // TODO =>
+      // login only if successful signup
       const res = await createUser(formData);
       const result = await signIn("credentials", {
         email: formData.email,

@@ -1,6 +1,10 @@
+"use client";
+import { useSession } from "next-auth/react";
 import Head from "next/head";
+import Link from "next/link";
 
 export default function Profile() {
+  const { data } = useSession();
   return (
     <div className="min-h-screen bg-gray-100 font-sans">
       <Head>
@@ -13,12 +17,9 @@ export default function Profile() {
           <span className="text-4xl">😊</span>
         </div>
         <div className="flex-grow">
-          <p className="text-lg">@pranavbavaskar1</p>
+          <p className="text-lg">{data?.user?.email}</p>
+          {/* TODO => send date joined from server and render below */}
           <p className="text-sm text-gray-200">Joined 08/2023</p>
-        </div>
-        <div className="flex gap-5">
-          <span>Followers <strong>0</strong></span>
-          <span>Following <strong>0</strong></span>
         </div>
       </header>
 
@@ -28,12 +29,8 @@ export default function Profile() {
         <aside className="w-52 bg-white p-5 border-r border-gray-200">
           <h3 className="text-lg font-semibold mb-3">Filters</h3>
           <ul className="space-y-3">
-            <li className="text-purple-600 cursor-pointer">Activity</li>
             <li className="text-purple-600 cursor-pointer">Recipes</li>
             <li className="text-purple-600 cursor-pointer">Photos</li>
-            <li className="text-purple-600 cursor-pointer">Reviews</li>
-            <li className="text-purple-600 cursor-pointer">Tweaks</li>
-            <li className="text-purple-600 cursor-pointer">Questions</li>
           </ul>
         </aside>
 
@@ -43,20 +40,27 @@ export default function Profile() {
           <div className="text-gray-600">
             <span className="text-2xl mr-2">⚠️</span>
             <p className="text-lg">
-              UH OH! Looks like pranavbavaskar1 has no activity!
+              UH OH! Looks like {data?.user?.email} has no activity!
             </p>
           </div>
         </section>
 
         {/* Ad Section */}
         <aside className="w-64 bg-pink-600 text-white p-5 text-center">
-          <div>
+          <div className="flex flex-col gap-4">
             <p className="text-sm">amazon.in</p>
-            <p className="text-lg font-semibold">Fashion picks for holi trendsetters</p>
+            <p className="text-lg font-semibold">
+              Fashion picks for holi trendsetters
+            </p>
             <p className="text-base">Up to 60% off*</p>
-            <button className="mt-3 bg-white text-pink-600 px-4 py-2 rounded-md">
+            <Link
+              href="https://amazon.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className=" bg-white text-pink-600 px-4 py-2 rounded-md"
+            >
               Shop now
-            </button>
+            </Link>
           </div>
         </aside>
       </div>
