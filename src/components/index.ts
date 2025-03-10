@@ -9,6 +9,3 @@ export { default as SecondaryHeroSection } from './SecondaryHeroSection';
 export { default as Footer } from './Footer';
 export { default as SearchBar } from './SearchBar';
 export { default as UserRecipes } from './UserRecipes';
-
-
-

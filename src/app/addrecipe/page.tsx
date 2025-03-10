@@ -11,8 +11,8 @@ const RecipeForm = () => {
     quote: "",
     ingredients: "",
     directions: "",
-    // image: null,
-    // imagePreview: null,
+    image: null,
+    imagePreview: null,
   });
 
   const handleChange = (
@@ -36,6 +36,12 @@ const RecipeForm = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
+    // TODO => understand when to use server actions and api routes
+    // steps
+    //1. send recipe info with filename and image type i.e. content/type
+    //2. generate unique image key and presigned url and send to client
+    //3. store recipe info and imageKey in DB
+    //4. render on client
     console.log(data);
     e.preventDefault();
     console.log("Submitted Recipe:", formData);

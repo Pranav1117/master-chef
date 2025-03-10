@@ -21,7 +21,6 @@ export async function createUser(data: {
 
 export async function postRecipe(data: any) {
   if (!data.user) throw new Error("User ID is required");
-
   const a = await prisma.recipe.create({
     data: {
       heading: data.heading,
@@ -29,7 +28,7 @@ export async function postRecipe(data: any) {
       ingredients: data.ingredients,
       directions: data.directions,
       user: {
-        connect: { id: data.user }, // Correct way to associate user
+        connect: { id: data.user }
       },
     },
   });
