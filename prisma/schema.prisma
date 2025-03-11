@@ -32,6 +32,7 @@ model Recipe {
   userId      String
   user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   quote       String?
+  // photos will contain unique key that will get us related image from s3
   photos      String?  // Array of image URLs
   readyIn     Int?     // Time in minutes
   ingredients String?  // Array of ingredients

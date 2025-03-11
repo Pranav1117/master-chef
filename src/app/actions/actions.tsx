@@ -27,16 +27,17 @@ export async function postRecipe(data: any) {
       quote: data.quote,
       ingredients: data.ingredients,
       directions: data.directions,
+      photos: data?.objectKey,
       user: {
-        connect: { id: data.user }
+        connect: { id: data.user },
       },
     },
   });
-
+// todo=. return here something
   console.log(a);
 }
 
-export async function getAllUserRecipes(){
-  const recipes = await prisma.recipe.findMany()
-  return recipes 
+export async function getAllUserRecipes() {
+  const recipes = await prisma.recipe.findMany();
+  return recipes;
 }

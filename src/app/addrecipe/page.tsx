@@ -1,10 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import { useSession } from "next-auth/react";
+import axios from "axios";
 import { postRecipe } from "../actions/actions";
 
 const RecipeForm = () => {
   const { data } = useSession();
+  const userId = data?.user?.id;
   const [formData, setFormData] = useState({
     heading: "",
     category: "",
@@ -13,6 +15,8 @@ const RecipeForm = () => {
     directions: "",
     image: null,
     imagePreview: null,
+    imageName: "",
+    objectType: "",
   });
 
   const handleChange = (
@@ -30,6 +34,8 @@ const RecipeForm = () => {
       setFormData((prev) => ({
         ...prev,
         image: file,
+        imageName: file?.name,
+        objectType: file?.type,
         imagePreview: URL.createObjectURL(file),
       }));
     }
@@ -37,16 +43,30 @@ const RecipeForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     // TODO => understand when to use server actions and api routes
-    // steps
-    //1. send recipe info with filename and image type i.e. content/type
-    //2. generate unique image key and presigned url and send to client
-    //3. store recipe info and imageKey in DB
-    //4. render on client
-    console.log(data);
     e.preventDefault();
-    console.log("Submitted Recipe:", formData);
+
+    // getting predefined url of s3 and unique image name from server to store in s3
+    const { data, status } = await axios.post("/api/upload-url", formData);
+
+    // storign image in S3
+    if (status === 200) {
+      try {
+        await axios.put(data.url, formData.image, {
+          headers: { "Content-Type": formData.objectType },
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    // storing recipe in db
     try {
-      await postRecipe({ ...formData, user: data?.user?.id });
+      const { image, ...formDataWithoutImage } = formData;
+      const res = await postRecipe({
+        ...formDataWithoutImage,
+        objectKey: data.objectKey,
+        user: userId,
+      });
     } catch (error) {
       console.log(error);
     }
