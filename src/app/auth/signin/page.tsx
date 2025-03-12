@@ -2,10 +2,9 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { PrismaClient } from "@prisma/client";
+import Link from "next/link";
 
 const SignIn = () => {
-  const prisma = new PrismaClient();
   const router = useRouter();
   const [user, setUser] = useState({
     email: "",
@@ -70,6 +69,13 @@ const SignIn = () => {
         >
           Sign in with Google
         </button>
+        <p className="text-black text-center mt-2">
+          New Member?{" "}
+          <Link href="/auth/signup" className="text-gray-500">
+            {" "}
+            Register here
+          </Link>
+        </p>
       </div>
     </div>
   );

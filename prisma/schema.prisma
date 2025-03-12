@@ -11,7 +11,7 @@ model User {
   id        String   @id @default(uuid())
   name      String?
   email     String   @unique
-  recipes   Recipe[] // One-to-many relationship (User → Recipes)
+  recipes   Recipe[]
   createdAt DateTime @default(now())
   location  String?
   password  String
@@ -20,7 +20,7 @@ model User {
 model Category {
   id        String   @id @default(uuid())
   name      String   @unique
-  recipes   Recipe[] // One-to-many relationship (Category → Recipes)
+  recipes   Recipe[]
   createdAt DateTime @default(now())
 }
 
@@ -33,9 +33,9 @@ model Recipe {
   user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   quote       String?
   // photos will contain unique key that will get us related image from s3
-  photos      String?  // Array of image URLs
-  readyIn     Int?     // Time in minutes
-  ingredients String?  // Array of ingredients
-  directions  String?  // Array of cooking steps
+  photos      String? 
+  readyIn     Int?    
+  ingredients String? 
+  directions  String? 
   createdAt   DateTime @default(now())
 }

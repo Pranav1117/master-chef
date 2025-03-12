@@ -1,4 +1,4 @@
-import { CardProps, Recipes } from "@/types";
+import { CardProps } from "@/types";
 
 const BottomFadeSquareCard: React.FC<CardProps> = ({
   title,

@@ -6,21 +6,23 @@ import { useRouter } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import * as Icons from "../components/icons";
 import { menuItems } from "@/constants";
+import { AuthUser } from "@/types";
 
 const inter = Outfit({ subsets: ["latin"], weight: "400" });
 
-// TODO => check types error in this file
 const Navbar = () => {
-  const [activeMenu, setActiveMenu] = useState(null);
+  const [activeMenu, setActiveMenu] = useState<number | null>(null);
   const [showAvatarMenu, setShowAvatarMenu] = useState(false);
-  
+
   // state to handle mobile toggle menu
   const [showMenu, setShowMenu] = useState(false);
+
   const router = useRouter();
   const menuRef = useRef(null);
   const avatarMenuRef = useRef(null);
-  const { data } = useSession();
-  // @ts-ignore
+
+  const { data: session } = useSession();
+  const user = session?.user as AuthUser;
 
   const toggleMenu = (index: number) => {
     setActiveMenu(activeMenu === index ? null : index);
@@ -39,13 +41,14 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && event.target instanceof Node) {
         setActiveMenu(null);
       }
-      // Check why avatar menu is not getting close if clicked outside
       if (
         avatarMenuRef.current &&
+        event.target instanceof Node &&
+        // @ts-ignore
         !avatarMenuRef.current.contains(event.target)
       ) {
         setShowAvatarMenu(false);
@@ -150,9 +153,7 @@ const Navbar = () => {
               className="z-50 flex flex-col gap-4 p-4 absolute top-14 right-[1%] bg-black"
               ref={avatarMenuRef}
             >
-              {/* TODO => check following ts ignore */}
-              {/* @ts-ignore */}
-              {data?.user?.id ? (
+              {user.id ? (
                 <>
                   <Link href="/profile">
                     <div className="cursor-pointer ">Profile</div>
@@ -163,39 +164,16 @@ const Navbar = () => {
                   <Link href="/" onClick={() => signOut({ callbackUrl: "/" })}>
                     <div className="cursor-pointer ">Log out</div>
                   </Link>
-                 
                 </>
               ) : (
-                // <Link href="/auth/signup">
-                //   <div className="cursor-pointer ">Sign Up</div>
-                // </Link>
-                 <Link href="/auth/signin">
-                 <div className="cursor-pointer ">Log In</div>
-               </Link>
+                <Link href="/auth/signin">
+                  <div className="cursor-pointer ">Log In</div>
+                </Link>
               )}
             </div>
           ) : null}
         </div>
       </div>
-      {/* {showLogInPopup && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-md w-[400px]">
-            <h2 className="text-xl font-bold text-center mb-4">Sign In</h2>
-            <button
-              onClick={() => SignIn()}
-              className="w-full bg-red-500 text-white p-2 rounded-md"
-            >
-              Sign in with Google
-            </button>
-            <button
-              onClick={() => setShowLogInPopUp(false)}
-              className="mt-4 w-full bg-gray-300 text-black p-2 rounded-md"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )} */}
     </div>
   );
 };

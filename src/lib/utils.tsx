@@ -5,6 +5,7 @@ import {
   PutObjectCommand,
   GetObjectCommand,
 } from "@aws-sdk/client-s3";
+import { MimeType } from "@/types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -22,7 +23,7 @@ export function getS3Client() {
   return s3Client;
 }
 
-export function getAwsPutCommand(objectKey, type = "") {
+export function getAwsPutCommand(objectKey: string, type?: MimeType) {
   return new PutObjectCommand({
     Bucket: process.env.AWS_BUCKET_NAME,
     Key: objectKey,
@@ -30,7 +31,7 @@ export function getAwsPutCommand(objectKey, type = "") {
   });
 }
 
-export function getAwsGetCommand(objectKey) {
+export function getAwsGetCommand(objectKey: string) {
   return new GetObjectCommand({
     Bucket: process.env.AWS_BUCKET_NAME,
     Key: objectKey,

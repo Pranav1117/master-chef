@@ -8,6 +8,10 @@ const prisma = new PrismaClient();
 
 const handler = NextAuth({
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID || "",
+      clientSecret: process.env.GOOGLE_SECRET || "",
+    }),
     CredentialsProvider({
       name: "Credentials",
       credentials: {
@@ -25,6 +29,8 @@ const handler = NextAuth({
         });
 
         if (!user) throw new Error("No user found with this email");
+        if (!user.password)
+          throw new Error("Account is registered with google mail");
 
         const isValid = await bcrypt.compare(
           credentials.password,
@@ -35,16 +41,35 @@ const handler = NextAuth({
         return user;
       },
     }),
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID || "",
-      clientSecret: process.env.GOOGLE_SECRET || "",
-    }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    // jwt: ({ token }) => {
-    //   return token;
-    // },
+    async signIn({ user, account }) {
+      if (!user || !user.email) {
+        return false;
+      }
+
+      if (account?.provider === "google") {
+        try {
+          const existingUser = await prisma.user.findUnique({
+            where: { email: user.email },
+          });
+
+          if (!existingUser) {
+            await prisma.user.create({
+              data: {
+                email: user.email,
+                name: user.name || "Unknown",
+                password: "",
+              },
+            });
+          }
+        } catch (error) {
+          return false;
+        }
+      }
+      return true;
+    },
     session: ({ session, token, user }: any) => {
       if (session && session.user) {
         session.user.id = token.sub;
@@ -56,6 +81,7 @@ const handler = NextAuth({
       return baseUrl; // Default: Redirect to home page
     },
   },
+  
 });
 
 export { handler as GET, handler as POST };

@@ -21,7 +21,7 @@ export async function createUser(data: {
 
 export async function postRecipe(data: any) {
   if (!data.user) throw new Error("User ID is required");
-  const a = await prisma.recipe.create({
+  const response = await prisma.recipe.create({
     data: {
       heading: data.heading,
       quote: data.quote,
@@ -33,8 +33,7 @@ export async function postRecipe(data: any) {
       },
     },
   });
-// todo=. return here something
-  console.log(a);
+  return response;
 }
 
 export async function getAllUserRecipes() {

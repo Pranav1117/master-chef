@@ -234,3 +234,19 @@ export interface CardProps {
   source?: string;
   loading?: boolean;
 }
+
+export interface AuthUser {
+  id?: string | null;
+  name?: string | null;
+  email?: string | null;
+  image?: string | null;
+}
+
+export type MimeType =
+  | "image/png"
+  | "image/jpeg"
+  | "image/webp"
+  | "application/json"
+  | "text/plain"
+  | "application/pdf"
+  | string;

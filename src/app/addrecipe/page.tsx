@@ -3,10 +3,13 @@ import React, { useState } from "react";
 import { useSession } from "next-auth/react";
 import axios from "axios";
 import { postRecipe } from "../actions/actions";
+import { AuthUser } from "@/types";
 
 const RecipeForm = () => {
   const { data } = useSession();
-  const userId = data?.user?.id;
+  const user = data?.user as AuthUser;
+  const userId = user?.id;
+
   const [formData, setFormData] = useState({
     heading: "",
     category: "",
@@ -18,6 +21,7 @@ const RecipeForm = () => {
     imageName: "",
     objectType: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -42,13 +46,13 @@ const RecipeForm = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    // TODO => understand when to use server actions and api routes
     e.preventDefault();
 
+    setLoading(true);
     // getting predefined url of s3 and unique image name from server to store in s3
     const { data, status } = await axios.post("/api/upload-url", formData);
 
-    // storign image in S3
+    // storing image in S3
     if (status === 200) {
       try {
         await axios.put(data.url, formData.image, {
@@ -69,6 +73,8 @@ const RecipeForm = () => {
       });
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -149,11 +155,26 @@ const RecipeForm = () => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-purple-600 text-white p-3 rounded-md hover:bg-purple-700 transition"
+          disabled={loading}
+          className={`w-full bg-purple-600 text-white p-3 rounded-md hover:bg-purple-700 transition ${
+            loading ? "opacity-50 cursor-not-allowed" : ""
+          }`}
         >
-          Submit Recipe
+          {loading ? "Submitting..." : "Submit Recipe"}
         </button>
       </form>
+
+      {/* Popup Loader */}
+      {loading && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
+            <div className="w-12 h-12 border-4 border-purple-600 border-t-transparent rounded-full animate-spin"></div>
+            <p className="mt-4 text-gray-700 font-semibold">
+              Uploading Recipe...
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

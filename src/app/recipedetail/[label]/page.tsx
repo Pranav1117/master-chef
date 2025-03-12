@@ -105,14 +105,6 @@ const RecipeDetail = ({ params }: { params: { label: string } }) => {
               </div>
             </div>
           </div>
-
-          {/* Related images */}
-          <div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
         </div>
 
         <div className="h-[100vh] w-[20%] bg-red-100 mt-4 ">
