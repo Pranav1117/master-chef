@@ -2,9 +2,11 @@
 import { useSession } from "next-auth/react";
 import Head from "next/head";
 import Link from "next/link";
+import { formatDate } from "@/lib/utils";
 
 export default function Profile() {
   const { data } = useSession();
+
   return (
     <div className="min-h-screen bg-gray-100 font-sans">
       <Head>
@@ -18,8 +20,10 @@ export default function Profile() {
         </div>
         <div className="flex-grow">
           <p className="text-lg">{data?.user?.email}</p>
-          {/* TODO => send date joined from server and render below */}
-          <p className="text-sm text-gray-200">Joined 08/2023</p>
+          <p className="text-sm text-gray-200">
+            {/* @ts-ignore */}
+            Joined {formatDate(data?.user?.dateJoined)}
+          </p>
         </div>
       </header>
 

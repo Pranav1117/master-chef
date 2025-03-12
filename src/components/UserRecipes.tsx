@@ -31,7 +31,8 @@ export default async function UserRecipes() {
       <div className="flex gap-10 mt-4">
         {recipesWithImages.length > 0 ? (
           recipesWithImages.slice(0, 4).map((item) => (
-            <Link key={item.id} href={`recipedetail/${item.id}`}>
+            // TODO=> add proper href after creating detail page for user uploaded recipes
+            <Link key={item.id} href={``}>
               <SquareCard
                 title={item.heading}
                 image={item.imageUrl ?? ""}

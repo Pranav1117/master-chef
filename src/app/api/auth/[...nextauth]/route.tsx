@@ -70,9 +70,16 @@ const handler = NextAuth({
       }
       return true;
     },
-    session: ({ session, token, user }: any) => {
+    session: async ({ session, token, user }: any) => {
       if (session && session.user) {
+        const userData = await prisma.user.findUnique({
+          where: { id: token.sub },
+          select: { createdAt: true },
+        });
         session.user.id = token.sub;
+        if (userData) {
+          session.user.dateJoined = userData.createdAt;
+        }
         return session;
       }
     },
@@ -81,7 +88,6 @@ const handler = NextAuth({
       return baseUrl; // Default: Redirect to home page
     },
   },
-  
 });
 
 export { handler as GET, handler as POST };

@@ -240,6 +240,7 @@ export interface AuthUser {
   name?: string | null;
   email?: string | null;
   image?: string | null;
+  dateJoined?: string | null;
 }
 
 export type MimeType =

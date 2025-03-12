@@ -20,10 +20,10 @@ const Navbar = () => {
   const router = useRouter();
   const menuRef = useRef(null);
   const avatarMenuRef = useRef(null);
-
+ 
   const { data: session } = useSession();
   const user = session?.user as AuthUser;
-
+  
   const toggleMenu = (index: number) => {
     setActiveMenu(activeMenu === index ? null : index);
   };
@@ -153,7 +153,7 @@ const Navbar = () => {
               className="z-50 flex flex-col gap-4 p-4 absolute top-14 right-[1%] bg-black"
               ref={avatarMenuRef}
             >
-              {user.id ? (
+              {user && user.id ? (
                 <>
                   <Link href="/profile">
                     <div className="cursor-pointer ">Profile</div>

@@ -37,3 +37,13 @@ export function getAwsGetCommand(objectKey: string) {
     Key: objectKey,
   });
 }
+
+export function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+
+  return date.toLocaleDateString("en-IN", {
+    day: "numeric",   // e.g., "5"
+    month: "long",    // e.g., "March"
+    year: "numeric",  // e.g., "2022"
+  });
+}

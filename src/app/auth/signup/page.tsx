@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
+import { toast } from "react-toastify";
 import { IconBrandGoogle } from "@tabler/icons-react";
 import { Label } from "../../../components/ui/label";
 import { Input } from "../../../components/ui/input";
@@ -30,10 +31,11 @@ export default function SignupFormDemo() {
       const result = await signIn("credentials", {
         email: formData.email,
         password: formData.password,
-        redirect: false, // Prevent automatic redirection
+        redirect: false,
       });
 
       if (result?.error) {
+        toast.error("Error while Signup")
       } else {
         router.push("/profile");
       }
