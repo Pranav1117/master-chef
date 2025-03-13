@@ -20,10 +20,10 @@ const Navbar = () => {
   const router = useRouter();
   const menuRef = useRef(null);
   const avatarMenuRef = useRef(null);
- 
+
   const { data: session } = useSession();
   const user = session?.user as AuthUser;
-  
+
   const toggleMenu = (index: number) => {
     setActiveMenu(activeMenu === index ? null : index);
   };
@@ -42,12 +42,11 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && event.target instanceof Node) {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
         setActiveMenu(null);
       }
       if (
         avatarMenuRef.current &&
-        event.target instanceof Node &&
         // @ts-ignore
         !avatarMenuRef.current.contains(event.target)
       ) {
