@@ -58,9 +58,9 @@ const RecipeDetail = ({ params }: { params: { label: string } }) => {
                   </p>
                 </div>
                 <div className="flex gap-4">
-                  <div className="w-8 h-8 bg-gray-200 rounded flex items-center justify-center">
+                  {/* <div className="w-8 h-8 bg-gray-200 rounded flex items-center justify-center">
                     <Icons.BookMarkIcon.Save />
-                  </div>
+                  </div> */}
                   <div className="w-8 h-8 bg-gray-200 rounded flex items-center justify-center">
                     {" "}
                     <Icons.PrintIcon />

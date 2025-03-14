@@ -36,6 +36,10 @@ const Navbar = () => {
     router.push("/search");
   };
 
+  // const navigateBookmarkPage = () => {
+  //   router.push("/bookmark");
+  // };
+
   const toggleAvatarMenu = () => {
     setShowAvatarMenu(!showAvatarMenu);
   };
@@ -141,9 +145,9 @@ const Navbar = () => {
           <button onClick={navigateSearchPage}>
             <Icons.SearchIcon />
           </button>
-          <button onClick={navigateSearchPage}>
+          {/* <button onClick={navigateBookmarkPage}>
             <Icons.BookMarkIcon.Save />
-          </button>
+          </button> */}
           <button onClick={toggleAvatarMenu}>
             <Icons.ProfileIcon />
           </button>

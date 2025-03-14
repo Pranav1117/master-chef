@@ -1,15 +1,19 @@
 "use client";
 import React, { useState } from "react";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 import axios from "axios";
 import { postRecipe } from "../actions/actions";
 import { AuthUser } from "@/types";
 
 const RecipeForm = () => {
+  const router = useRouter();
   const { data } = useSession();
   const user = data?.user as AuthUser;
   const userId = user?.id;
 
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     heading: "",
     category: "",
@@ -21,7 +25,6 @@ const RecipeForm = () => {
     imageName: "",
     objectType: "",
   });
-  const [loading, setLoading] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -71,8 +74,9 @@ const RecipeForm = () => {
         objectKey: data.objectKey,
         user: userId,
       });
+      router.push("/");
     } catch (error) {
-      console.log(error);
+      toast.error("Error while storing data")
     } finally {
       setLoading(false);
     }

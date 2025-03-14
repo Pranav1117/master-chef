@@ -12,9 +12,11 @@ export default async function UserRecipes() {
     recipes.map(async (recipe) => {
       if (!recipe.photos) return { ...recipe, imageUrl: null };
 
-      const command = getAwsGetCommand(recipe?.photos)
+      const command = getAwsGetCommand(recipe?.photos);
 
-      const signedUrl = await getSignedUrl(s3Client, command, { expiresIn: 3600 });
+      const signedUrl = await getSignedUrl(s3Client, command, {
+        expiresIn: 3600,
+      });
 
       return { ...recipe, imageUrl: signedUrl };
     })
@@ -32,7 +34,7 @@ export default async function UserRecipes() {
         {recipesWithImages.length > 0 ? (
           recipesWithImages.slice(0, 4).map((item) => (
             // TODO=> add proper href after creating detail page for user uploaded recipes
-            <Link key={item.id} href={``}>
+            <Link key={item.id} href={`/userrecipedetail/${item.id}`}>
               <SquareCard
                 title={item.heading}
                 image={item.imageUrl ?? ""}
