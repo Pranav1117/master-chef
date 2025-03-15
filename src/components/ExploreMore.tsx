@@ -29,7 +29,7 @@ const ExploreMore = () => {
       <div className="flex justify-between items-center text-4xl">
         <p>EXPLORE MORE</p>
         <div className="text-blue-500 text-sm cursor-pointer">
-          <Link href={`recipelist/explore`}>VIEW ALL</Link>
+          <Link href={`recipelist/explore`} prefetch={true}>VIEW ALL</Link>
         </div>
       </div>
       <div className="flex gap-10 mt-4">
@@ -44,8 +44,8 @@ const ExploreMore = () => {
             return (
               <div className="w-full" key={index}>
                 <Link
-                  href={`recipedetail/${encodeURIComponent(item.recipe.label)}`}
-                >
+                  href={`recipedetail/${encodeURIComponent(item.recipe.label)}`} prefetch={true}
+                > 
                   <CircularCard
                     key={index}
                     title={item.recipe.label}

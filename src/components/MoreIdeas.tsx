@@ -33,7 +33,7 @@ const MoreIdeas = () => {
       <div className="flex justify-between items-center text-4xl">
         <p>MORE IDEAS</p>
         <div className="text-blue-500 text-sm cursor-pointer">
-          <Link href={`recipelist/ideas`}>VIEW ALL</Link>
+          <Link href={`recipelist/ideas`} prefetch={true}>VIEW ALL</Link>
         </div>
       </div>
       <div className="flex gap-10 mt-4">
@@ -48,7 +48,7 @@ const MoreIdeas = () => {
             return (
               <div className="w-full" key={index}>
                 <Link
-                  href={`recipedetail/${encodeURIComponent(item.recipe.label)}`}
+                  href={`recipedetail/${encodeURIComponent(item.recipe.label)}`} prefetch={true}
                 >
                   <SquareCard
                     key={index}

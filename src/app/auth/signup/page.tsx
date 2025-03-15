@@ -9,6 +9,7 @@ import { Label } from "../../../components/ui/label";
 import { Input } from "../../../components/ui/input";
 import { cn } from "@/lib/utils";
 import { createUser } from "@/app/actions/actions";
+import { ErrorMessages } from "@/constants";
 
 export default function SignupFormDemo() {
   const router = useRouter();
@@ -35,7 +36,7 @@ export default function SignupFormDemo() {
       });
 
       if (result?.error) {
-        toast.error("Error while Signup")
+        toast.error(ErrorMessages.SERVER_ERROR);
       } else {
         router.push("/profile");
       }
@@ -116,7 +117,7 @@ export default function SignupFormDemo() {
         </form>
         <p className="text-white text-center mt-2">
           Already registered?{" "}
-          <Link href="/auth/signin" className="text-gray-500">
+          <Link href="/auth/signin" className="text-gray-500" prefetch={true}>
             {" "}
             Login Here
           </Link>

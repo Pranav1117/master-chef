@@ -29,7 +29,7 @@ const FanFavourite = () => {
       <div className="flex justify-between items-center text-4xl">
         <p>FAN FAVOURITE</p>
         <div className="text-blue-500 text-sm cursor-pointer">
-          <Link href={`recipelist/favourite`}>VIEW ALL</Link>
+          <Link href={`recipelist/favourite`} prefetch={true}>VIEW ALL</Link>
         </div>
       </div>
       <div className="flex justify-between gap-10 mt-4 flex-wrap w-full">
@@ -44,7 +44,7 @@ const FanFavourite = () => {
             return (
               <div className="w-[22%] flex" key={index}>
                 <Link
-                  href={`recipedetail/${encodeURIComponent(item.recipe.label)}`}
+                  href={`recipedetail/${encodeURIComponent(item.recipe.label)}`} prefetch={true}
                 >
                   <SquareCard
                     key={index}

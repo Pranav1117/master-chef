@@ -29,7 +29,7 @@ const TrendinNow = () => {
       <div className="flex justify-between text-4xl items-center">
         <p>TRENDING NOW</p>
         <div className="text-blue-500 text-sm cursor-pointer">
-          <Link href={`recipelist/trending`}>VIEW ALL</Link>
+          <Link href={`recipelist/trending`} prefetch={true}>VIEW ALL</Link>
         </div>
       </div>
       <div className="flex gap-10 mt-4">
@@ -44,7 +44,7 @@ const TrendinNow = () => {
             return (
               <div className="w-full" key={index}>
                 <Link
-                  href={`recipedetail/${encodeURIComponent(item.recipe.label)}`}
+                  href={`recipedetail/${encodeURIComponent(item.recipe.label)}`} prefetch={true}
                 >
                   <SquareCard
                     key={index}

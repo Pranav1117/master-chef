@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { postRecipe } from "../actions/actions";
 import { AuthUser } from "@/types";
+import { ErrorMessages } from "@/constants";
 
 const RecipeForm = () => {
   const router = useRouter();
@@ -76,7 +77,7 @@ const RecipeForm = () => {
       });
       router.push("/");
     } catch (error) {
-      toast.error("Error while storing data")
+      toast.error(ErrorMessages.SERVER_ERROR);
     } finally {
       setLoading(false);
     }

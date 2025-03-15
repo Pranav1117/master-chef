@@ -73,7 +73,7 @@ export default function Profile() {
               href="https://amazon.in"
               target="_blank"
               rel="noopener noreferrer"
-              className=" bg-white text-pink-600 px-4 py-2 rounded-md"
+              className=" bg-white text-pink-600 px-4 py-2 rounded-md" prefetch={true}
             >
               Shop now
             </Link>

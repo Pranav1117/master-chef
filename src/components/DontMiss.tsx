@@ -29,7 +29,7 @@ const DontMiss = () => {
       <div className="flex justify-between items-center text-4xl">
         <p>DON'T MISS</p>
         <div className="text-blue-500 text-sm cursor-pointer">
-          <Link href={`recipelist/unique`}>VIEW ALL</Link>
+          <Link href={`recipelist/unique`} prefetch={true}>VIEW ALL</Link>
         </div>
       </div>
       <div className="flex gap-10 mt-4">
@@ -44,7 +44,7 @@ const DontMiss = () => {
             return (
               <div className="w-full" key={index}>
                 <Link
-                  href={`recipedetail/${encodeURIComponent(item.recipe.label)}`}
+                  href={`recipedetail/${encodeURIComponent(item.recipe.label)}`} prefetch={true}
                 >
                   <BottomFadeSquareCard
                     key={index}

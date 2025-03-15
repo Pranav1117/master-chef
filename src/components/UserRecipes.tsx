@@ -27,14 +27,14 @@ export default async function UserRecipes() {
       <div className="flex justify-between items-center text-4xl">
         <p>Uploaded Recipes</p>
         <div className="text-blue-500 text-sm cursor-pointer">
-          <Link href={`recipelist/ideas`}>VIEW ALL</Link>
+          <Link href={`recipelist/ideas`} prefetch={true}>VIEW ALL</Link>
         </div>
       </div>
       <div className="flex gap-10 mt-4">
         {recipesWithImages.length > 0 ? (
           recipesWithImages.slice(0, 4).map((item) => (
             // TODO=> add proper href after creating detail page for user uploaded recipes
-            <Link key={item.id} href={`/userrecipedetail/${item.id}`}>
+            <Link key={item.id} href={`/userrecipedetail/${item.id}`} prefetch={true}>
               <SquareCard
                 title={item.heading}
                 image={item.imageUrl ?? ""}

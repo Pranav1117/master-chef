@@ -16,7 +16,7 @@ const ListCard: React.FC<CardProps> = ({ title, image, source, loading }) => {
           </div>
         </>
       ) : (
-        <Link href={`/recipedetail/${title}`} className="flex flex-col">
+        <Link href={`/recipedetail/${title}`} className="flex flex-col" prefetch={true}>
           <div className="w-full shadow-lg">
             <img
               src={`${image}`}

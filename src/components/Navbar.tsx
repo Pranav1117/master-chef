@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Outfit } from "next/font/google";
 import { useRouter } from "next/navigation";
@@ -11,6 +11,7 @@ import { AuthUser } from "@/types";
 const inter = Outfit({ subsets: ["latin"], weight: "400" });
 
 const Navbar = () => {
+  
   const [activeMenu, setActiveMenu] = useState<number | null>(null);
   const [showAvatarMenu, setShowAvatarMenu] = useState(false);
 
@@ -32,9 +33,9 @@ const Navbar = () => {
     setShowMenu(!showMenu);
   };
 
-  const navigateSearchPage = () => {
+  const navigateSearchPage = useCallback(() => {
     router.push("/search");
-  };
+  }, [router]);
 
   // const navigateBookmarkPage = () => {
   //   router.push("/bookmark");
@@ -108,6 +109,7 @@ const Navbar = () => {
           <Link
             href="/"
             className={`text-2xl font-bold cursor-pointer ${inter.className}`}
+            prefetch={true}
           >
             Master Chef
           </Link>
@@ -125,6 +127,7 @@ const Navbar = () => {
                 >
                   {item.submenu.map((sub, subIndex) => (
                     <Link
+                      prefetch={true}
                       onClick={() => setActiveMenu(null)}
                       key={subIndex}
                       href={sub.path}
@@ -158,10 +161,10 @@ const Navbar = () => {
             >
               {user && user.id ? (
                 <>
-                  <Link href="/profile">
+                  <Link href="/profile" prefetch={true}>
                     <div className="cursor-pointer ">Profile</div>
                   </Link>
-                  <Link href="/addrecipe">
+                  <Link href="/addrecipe" prefetch={true}>
                     <div className="cursor-pointer ">Add Recipe</div>
                   </Link>
                   <Link href="/" onClick={() => signOut({ callbackUrl: "/" })}>
@@ -169,7 +172,7 @@ const Navbar = () => {
                   </Link>
                 </>
               ) : (
-                <Link href="/auth/signin">
+                <Link href="/auth/signin" prefetch={true}>
                   <div className="cursor-pointer ">Log In</div>
                 </Link>
               )}

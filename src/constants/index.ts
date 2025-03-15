@@ -1,4 +1,11 @@
-export const FETCH_RECIPE_FAILED = "Failed to fetch to Recipe"
+
+export enum ErrorMessages {
+  FETCH_RECIPE_FAILED = "Failed to fetch to Recipe",
+  TOO_MANY_REQUEST= "Api limit exceeded",
+  USER_NOT_FOUND = "User not found",
+  SERVER_ERROR = "Internal server error",
+  WENT_WRONG= "Something Went Wrong"
+}
 
 export const DIRECTIONS = [
     "Wash and prep all your ingredients, such as chopping vegetables, measuring out spices, and marinating meats. Having everything ready makes the cooking process smoother.",
