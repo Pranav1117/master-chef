@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { fetchRecipes } from "@/services/recipes";
 import { Recipes } from "@/types";
-import ListCard from "@/components/Cards/listCard";
+import ListCard from "@/components/Cards/ListCard";
 
 const RecipeList = ({ params }: { params: { category: string } }) => {
   const [recipeList, setRecipeList] = useState<Recipes[] | null>(null);
