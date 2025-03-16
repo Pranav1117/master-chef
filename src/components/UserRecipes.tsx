@@ -27,7 +27,7 @@ export default async function UserRecipes() {
       <div className="flex justify-between items-center text-4xl">
         <p>Uploaded Recipes</p>
         <div className="text-blue-500 text-sm cursor-pointer">
-          <Link href={`recipelist/ideas`} prefetch={true}>VIEW ALL</Link>
+          {/* <Link href={`recipelist/ideas`} prefetch={true}>VIEW ALL</Link> */}
         </div>
       </div>
       <div className="flex gap-10 mt-4">

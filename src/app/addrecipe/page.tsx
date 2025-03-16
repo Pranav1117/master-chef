@@ -10,8 +10,8 @@ import { ErrorMessages } from "@/constants";
 
 const RecipeForm = () => {
   const router = useRouter();
-  const { data } = useSession();
-  const user = data?.user as AuthUser;
+  const session = useSession();
+  const user = session.data?.user as AuthUser;
   const userId = user?.id;
 
   const [loading, setLoading] = useState(false);

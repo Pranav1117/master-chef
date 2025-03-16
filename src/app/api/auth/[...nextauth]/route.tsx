@@ -73,19 +73,19 @@ const handler = NextAuth({
     session: async ({ session, token, user }: any) => {
       if (session && session.user) {
         const userData = await prisma.user.findUnique({
-          where: { id: token.sub },
-          select: { createdAt: true },
+          where: { email: session.user.email },
+          select: { id: true, createdAt: true },
         });
-        session.user.id = token.sub;
         if (userData) {
+          session.user.id = userData.id;
           session.user.dateJoined = userData.createdAt;
         }
         return session;
       }
     },
     async redirect({ url, baseUrl }) {
-      if (url === "/auth/signin") return "/profile"; // Redirect to /dashboard
-      return baseUrl; // Default: Redirect to home page
+      if (url === "/auth/signin") return "/profile";
+      return baseUrl;
     },
   },
 });
