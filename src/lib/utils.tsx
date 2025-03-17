@@ -75,11 +75,12 @@ export const authOptions = {
               data: {
                 email: user.email,
                 name: user.name || "Unknown",
-                password: "", 
+                password: "",
               },
             });
           }
         } catch (_error) {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           return false;
         }
       }
