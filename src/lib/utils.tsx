@@ -79,8 +79,7 @@ export const authOptions = {
               },
             });
           }
-          // @typescript-eslint/no-unused-vars
-        } catch (error) {
+        } catch (_error) {
           return false;
         }
       }
