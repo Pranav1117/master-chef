@@ -8,7 +8,7 @@ export const fetchRecipes = async (query: string) => {
     const { data } = await axios.get(url);
     return data;
   } catch (error) {
-    // @ts-ignore
+    // @ts-expect-error
     if (error.status === 429) {
       toast.error(ErrorMessages.TOO_MANY_REQUEST);
     } else {
