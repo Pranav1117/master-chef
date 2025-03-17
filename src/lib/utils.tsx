@@ -75,7 +75,7 @@ export const authOptions = {
               data: {
                 email: user.email,
                 name: user.name || "Unknown",
-                password: "",
+                password: "", 
               },
             });
           }
