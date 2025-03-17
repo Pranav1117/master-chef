@@ -3,7 +3,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { useMotionTemplate, useMotionValue, motion } from "motion/react";
-
+// @typescript-eslint/no-empty-object-type
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {}
 
@@ -15,6 +15,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
 
+    // @typescript-eslint/no-explicit-any
     function handleMouseMove({ currentTarget, clientX, clientY }: any) {
       const { left, top } = currentTarget.getBoundingClientRect();
 

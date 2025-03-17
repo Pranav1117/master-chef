@@ -33,7 +33,7 @@ const RecipeList = ({ params }: { params: { category: string } }) => {
           Discover a variety of delicious recipes curated just for you. Find
           inspiration for your next meal and start cooking today! From quick
           bites to gourmet meals, explore recipes that suit every craving.
-          Whether you're a beginner or a seasoned chef, there's something for
+          Whether you{`&apos;`}re a beginner or a seasoned chef, there{`&apos;`}s something for
           everyone. Unleash your inner cook and create something amazing today!
         </p>
       </div>

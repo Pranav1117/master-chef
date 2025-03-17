@@ -11,12 +11,11 @@ const RecipeDetail = ({ params }: { params: { label: string } }) => {
   const [loading, setLoading] = useState(false);
   const [recipeDetail, setRecipeDetail] = useState<Recipes | null>(null);
 
-  if (!label) return notFound();
-
+  
   const getRecipeDetails = async () => {
     setLoading(true);
     try {
-
+      
       const data = await fetchRecipes(decodeURIComponent(label).split(" ").join());
       const detail = data?.hits[0];
       setRecipeDetail(detail);
@@ -24,11 +23,12 @@ const RecipeDetail = ({ params }: { params: { label: string } }) => {
       setLoading(false);
     }
   };
-
+  
   useEffect(() => {
     getRecipeDetails();
   }, []);
-
+  
+  if (!label) return notFound();
   if (loading) return <p>Loading....</p>;
 
   return (

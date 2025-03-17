@@ -7,7 +7,7 @@ import {
 } from "@aws-sdk/client-s3";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import bcrypt from "bcryptjs"; 
+import bcrypt from "bcryptjs";
 import { PrismaClient, User } from "@prisma/client";
 import { Session } from "inspector/promises";
 import { JWT } from "next-auth/jwt";
@@ -79,6 +79,7 @@ export const authOptions = {
               },
             });
           }
+          // @typescript-eslint/no-unused-vars
         } catch (error) {
           return false;
         }
