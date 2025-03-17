@@ -30,11 +30,11 @@ const RecipeList = ({ params }: { params: { category: string } }) => {
       <div className="w-[90%] mx-auto">
         <h2 className="text-4xl">Quick & Easy {category} recipes</h2>
         <p className="mt-4">
-          "Discover a variety of delicious recipes curated just for you. Find
+          Discover a variety of delicious recipes curated just for you. Find
           inspiration for your next meal and start cooking today! From quick
           bites to gourmet meals, explore recipes that suit every craving.
           Whether you're a beginner or a seasoned chef, there's something for
-          everyone. Unleash your inner cook and create something amazing today!"
+          everyone. Unleash your inner cook and create something amazing today!
         </p>
       </div>
 
@@ -44,8 +44,9 @@ const RecipeList = ({ params }: { params: { category: string } }) => {
           {/* content */}
           {loading ? (
             <div className="w-[70%]">
+              {/* @typescript-eslint/no-unused-vars */}
               {[...Array(1)].map((_, index) => (
-                <ListCard title="" source="" image="" loading={loading} />
+                <ListCard key={index} title="" source="" image="" loading={loading} />
               ))}
             </div>
           ) : (
@@ -53,6 +54,7 @@ const RecipeList = ({ params }: { params: { category: string } }) => {
               {recipeList?.map((recipe, index) => {
                 return (
                   <ListCard
+                  key={index}
                     title={recipe?.recipe.label}
                     image={recipe?.recipe.image}
                     source={recipe?.recipe?.source}

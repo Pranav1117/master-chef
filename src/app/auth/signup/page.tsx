@@ -28,7 +28,7 @@ export default function SignupFormDemo() {
     try {
       // TODO =>
       // login only if successful signup
-      const res = await createUser(formData);
+      await createUser(formData);
       const result = await signIn("credentials", {
         email: formData.email,
         password: formData.password,

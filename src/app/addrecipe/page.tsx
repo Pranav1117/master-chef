@@ -69,6 +69,7 @@ const RecipeForm = () => {
 
     // storing recipe in db
     try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { image, ...formDataWithoutImage } = formData;
       await postRecipe({
         ...formDataWithoutImage,
@@ -76,6 +77,7 @@ const RecipeForm = () => {
         user : userId,
       });
       router.push("/");
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       toast.error(ErrorMessages.SERVER_ERROR);
     } finally {

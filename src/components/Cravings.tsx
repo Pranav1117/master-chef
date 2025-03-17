@@ -27,9 +27,11 @@ const Cravings = () => {
   return (
     <div className="w-[90%] mx-auto">
       <div className="flex justify-between text-4xl items-center">
-        <p>WHAT WE'RE CRAVING</p>
+        <p>WHAT WE{`&apos;`}RE CRAVING</p>
         <div className="text-blue-500 text-sm cursor-pointer">
-          <Link href={`recipelist/cravings`} prefetch={true}>VIEW ALL</Link>
+          <Link href={`recipelist/cravings`} prefetch={true}>
+            VIEW ALL
+          </Link>
         </div>
       </div>
       <div className="flex gap-10 mt-4">
@@ -44,7 +46,8 @@ const Cravings = () => {
             return (
               <div className="w-full" key={index}>
                 <Link
-                  href={`recipedetail/${encodeURIComponent(item.recipe.label)}`} prefetch={true}
+                  href={`recipedetail/${encodeURIComponent(item.recipe.label)}`}
+                  prefetch={true}
                 >
                   <BottomFadeSquareCard
                     key={index}
@@ -58,7 +61,9 @@ const Cravings = () => {
           })
         ) : (
           // TODO => add something with this msg like img or gif
-          <div className="w-[100%] h-[200px] border border-gray-200 text-center leading-[200px] text-xl">No Data available</div>
+          <div className="w-[100%] h-[200px] border border-gray-200 text-center leading-[200px] text-xl">
+            No Data available
+          </div>
         )}
       </div>
     </div>

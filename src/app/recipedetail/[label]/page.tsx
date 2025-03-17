@@ -84,7 +84,7 @@ const RecipeDetail = ({ params }: { params: { label: string } }) => {
                 <ol className="space-y-6 mt-4 list-inside list-decimal">
                   {DIRECTIONS.map((step, index) => {
                     return (
-                        <li>{step}</li>
+                        <li key={index}>{step}</li>
                     );
                   })}
                 </ol>
@@ -97,7 +97,7 @@ const RecipeDetail = ({ params }: { params: { label: string } }) => {
                     recipeDetail?.recipe.ingredientLines?.map(
                       (ingredients, index) => {
                         return (
-                            <li>{ingredients}</li>
+                            <li key={index}>{ingredients}</li>
                         );
                       }
                     )}

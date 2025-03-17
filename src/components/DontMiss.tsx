@@ -27,7 +27,7 @@ const DontMiss = () => {
   return (
     <div className="w-[90%] mx-auto">
       <div className="flex justify-between items-center text-4xl">
-        <p>DON'T MISS</p>
+        <p>DON{`&apos;`}T MISS</p>
         <div className="text-blue-500 text-sm cursor-pointer">
           <Link href={`recipelist/unique`} prefetch={true}>VIEW ALL</Link>
         </div>

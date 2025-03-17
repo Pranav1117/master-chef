@@ -15,6 +15,7 @@ export async function POST(req: Request) {
 
     const url = await getSignedUrl(s3Client, command);
     return NextResponse.json({ url, objectKey }, { status: 200 });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     return NextResponse.json(
       { error: "Failed to generate pre-signed URL" },
