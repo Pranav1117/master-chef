@@ -4,8 +4,6 @@ import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import { formatDate } from "@/lib/utils";
-import iceCreamImg from "../../../public/images/ice-cream.jpg";
-import avatarImg from "../../../public/images/avatar-icon.png";
 
 export default function Profile() {
   const { data } = useSession();
@@ -20,7 +18,7 @@ export default function Profile() {
       <header className="flex items-center p-5 bg-gradient-to-r from-purple-600 to-blue-400 text-white">
         <div className="w-24 h-24 bg-red-400 flex items-center justify-center mr-5">
           <span className="text-4xl">
-            <Image src={avatarImg} alt="avatar" />
+            <Image src="/images/avatar-icon.png" alt="avatar" width={100} height={100}/>
           </span>
         </div>
         <div className="flex-grow">
@@ -50,7 +48,7 @@ export default function Profile() {
             {/* <span className="text-2xl mr-2"></span> */}
             <div className="text-lg flex justify-center items-center gap-4">
               <Image
-                src={iceCreamImg}
+                src="/images/ice-cream.jpg"
                 alt="no info"
                 width={100}
                 height={100}
@@ -73,7 +71,8 @@ export default function Profile() {
               href="https://amazon.in"
               target="_blank"
               rel="noopener noreferrer"
-              className=" bg-white text-pink-600 px-4 py-2 rounded-md" prefetch={true}
+              className=" bg-white text-pink-600 px-4 py-2 rounded-md"
+              prefetch={true}
             >
               Shop now
             </Link>

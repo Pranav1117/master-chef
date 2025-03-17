@@ -19,7 +19,14 @@ export async function createUser(data: {
   });
 }
 
-export async function postRecipe(data: any) {
+export async function postRecipe(data : {
+  heading: string;
+  quote: string;
+  ingredients: string;
+  directions: string;
+  objectKey: string;
+  user: string;
+}) {
   if (!data.user) throw new Error("User ID is required");
   const response = await prisma.recipe.create({
     data: {
@@ -40,7 +47,6 @@ export async function getAllUserRecipes() {
   const recipes = await prisma.recipe.findMany();
   return recipes;
 }
-
 
 export async function getRecipeById(id: string) {
   return await prisma.recipe.findUnique({

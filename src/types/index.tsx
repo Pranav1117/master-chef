@@ -140,11 +140,11 @@ interface RecipeProp {
   cautions: string[];
   ingredientLines: string[];
   ingredients: Ingredient[];
-  calories: Number;
-  totalCO2Emissions: Number;
+  calories: number;
+  totalCO2Emissions: number;
   co2EmissionsClass: string;
-  totalWeight: Number;
-  totalTime: Number;
+  totalWeight: number;
+  totalTime: number;
   cuisineType: string[];
   mealType: string[];
   dishType: string[];

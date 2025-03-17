@@ -70,10 +70,10 @@ const RecipeForm = () => {
     // storing recipe in db
     try {
       const { image, ...formDataWithoutImage } = formData;
-      const res = await postRecipe({
+      await postRecipe({
         ...formDataWithoutImage,
         objectKey: data.objectKey,
-        user: userId,
+        user : userId,
       });
       router.push("/");
     } catch (error) {

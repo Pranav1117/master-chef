@@ -1,9 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { ErrorMessages } from "@/constants";
 
-export default function Error({ error, reset }) {
+export default function Error({ reset }) {
   const [loading, setLoading] = useState(false);
 
   const handleReset = async () => {

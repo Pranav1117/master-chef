@@ -7,11 +7,11 @@ import { useSession, signOut } from "next-auth/react";
 import * as Icons from "../components/icons";
 import { menuItems } from "@/constants";
 import { AuthUser } from "@/types";
+import Spinner from "./Spinner";
 
 const inter = Outfit({ subsets: ["latin"], weight: "400" });
 
 const Navbar = () => {
-  
   const [activeMenu, setActiveMenu] = useState<number | null>(null);
   const [showAvatarMenu, setShowAvatarMenu] = useState(false);
 
@@ -22,7 +22,7 @@ const Navbar = () => {
   const menuRef = useRef(null);
   const avatarMenuRef = useRef(null);
 
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const user = session?.user as AuthUser;
 
   const toggleMenu = (index: number) => {
@@ -151,9 +151,13 @@ const Navbar = () => {
           {/* <button onClick={navigateBookmarkPage}>
             <Icons.BookMarkIcon.Save />
           </button> */}
-          <button onClick={toggleAvatarMenu}>
-            <Icons.ProfileIcon />
-          </button>
+          {status === "loading" ? (
+            <Spinner />
+          ) : (
+            <button onClick={toggleAvatarMenu}>
+              <Icons.ProfileIcon />
+            </button>
+          )}
           {showAvatarMenu ? (
             <div
               className="z-50 flex flex-col gap-4 p-4 absolute top-14 right-[1%] bg-black"

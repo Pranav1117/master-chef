@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 const SecondaryHeroSection = () => {
@@ -12,7 +13,13 @@ const SecondaryHeroSection = () => {
           router.push("/recipelist/pumpkin");
         }}
       >
-        <img src="/images/HeroSectionImage.webp" alt="Pumpkin Recipes" />
+        <Image
+          src="/images/HeroSectionImage.webp"
+          alt="Pumpkin Recipes"
+          layout="responsive"
+          width={100}
+          height={100}
+        />
       </div>
       <div className="w-[35%] py-14 px-6 space-y-4">
         <p className="text-lg">COLLECTION</p>
