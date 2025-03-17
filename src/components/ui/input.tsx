@@ -5,9 +5,9 @@ import { cn } from "@/lib/utils";
 import { useMotionTemplate, useMotionValue, motion } from "motion/react";
 
 
-// @typescript-eslint/no-empty-object-type
 export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {}
+// @typescript-eslint/no-empty-object-type
+extends React.InputHTMLAttributes<HTMLInputElement> {}
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, ...props }, ref) => {
@@ -17,7 +17,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
 
-    // @ts-expect-error
+    // @ts-expect-error dont know type of following
     function handleMouseMove({ currentTarget, clientX, clientY }) {
       const { left, top } = currentTarget.getBoundingClientRect();
 
