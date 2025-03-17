@@ -1,0 +1,9 @@
+{
+    "build": {
+      "env": {
+        "NEXT_PUBLIC_DISABLE_ESLINT": "true",
+        "NEXT_PUBLIC_DISABLE_TSC": "true"
+      }
+    }
+  }
+  

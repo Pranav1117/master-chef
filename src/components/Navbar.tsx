@@ -52,7 +52,6 @@ const Navbar = () => {
       }
       if (
         avatarMenuRef.current &&
-        // @ts-expect-error
         !avatarMenuRef.current.contains(event.target)
       ) {
         setShowAvatarMenu(false);

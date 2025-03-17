@@ -86,17 +86,13 @@ export const authOptions = {
       return true;
     },
     session: async ({ session }: { session: Session; token: JWT }) => {
-      // @ts-ignore
       if (session?.user) {
         const userData = await prisma.user.findUnique({
-          // @ts-ignore
           where: { email: session.user.email },
           select: { id: true, createdAt: true },
         });
         if (userData) {
-          // @ts-ignore
           session.user.id = userData.id;
-          // @ts-ignore
           session.user.dateJoined = userData.createdAt;
         }
         return session;
@@ -110,7 +106,6 @@ export const authOptions = {
 };
 
 export function getS3Client() {
-  // @ts-ignore
   const s3Client = new S3Client({
     region: process.env.AWS_REGION,
     credentials: {

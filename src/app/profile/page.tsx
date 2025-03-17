@@ -24,7 +24,6 @@ export default function Profile() {
         <div className="flex-grow">
           <p className="text-lg">{data?.user?.email}</p>
           <p className="text-sm text-gray-200">
-            {/* @ts-expect-error */}
             Joined {formatDate(data?.user?.dateJoined)}
           </p>
         </div>
