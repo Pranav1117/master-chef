@@ -8,7 +8,7 @@ export const fetchRecipes = async (query: string) => {
     const { data } = await axios.get(url);
     return data;
   } catch (error) {
-    // @ts-expect-error
+    // @ts-expect-error API response type is unpredictable
     if (error.status === 429) {
       toast.error(ErrorMessages.TOO_MANY_REQUEST);
     } else {
