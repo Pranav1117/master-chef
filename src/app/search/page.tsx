@@ -4,6 +4,8 @@ import { Recipes } from "@/types";
 import { SearchBar } from "@/components";
 import { ListCard } from "@/components/Cards";
 import { fetchRecipes } from "@/services/recipes";
+import { toast } from "react-toastify";
+import { ErrorMessages } from "@/constants";
 
 const Search = () => {
   const [searchItem, setSearchItem] = useState("");
@@ -15,7 +17,10 @@ const Search = () => {
         const data = await fetchRecipes(searchItem);
         const recipes = data?.hits;
         setRecipes(recipes);
-      } 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch (err) {
+        toast.error(ErrorMessages.FETCH_RECIPE_FAILED);
+      }
     };
     if (searchItem) {
       getRecipeList();
@@ -30,7 +35,7 @@ const Search = () => {
           ? recipes?.map((item, index) => (
               <>
                 <ListCard
-                key={index}
+                  key={index}
                   title={item?.recipe?.label}
                   image={item?.recipe?.image}
                   source={item?.recipe.source}
