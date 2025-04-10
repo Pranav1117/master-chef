@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
-
-export default function Error({ reset }) {
+type ErrorProps = {
+  reset: () => Promise<void>; // or () => void if not async
+};
+export default function Error({ reset }: ErrorProps) {
   const [loading, setLoading] = useState(false);
 
   const handleReset = async () => {
