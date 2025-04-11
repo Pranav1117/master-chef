@@ -8,6 +8,18 @@ import { postRecipe } from "../actions/actions";
 import { AuthUser } from "@/types";
 import { ErrorMessages } from "@/constants";
 
+interface RecipeFormData {
+  heading: string;
+  category: string;
+  quote: string;
+  ingredients: string;
+  directions: string;
+  image: File | null;
+  imagePreview: string | null;
+  imageName: string;
+  objectType: string;
+}
+
 const RecipeForm = () => {
   const router = useRouter();
   const session = useSession();
@@ -15,7 +27,7 @@ const RecipeForm = () => {
   const userId = user?.id;
 
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<RecipeFormData>({
     heading: "",
     category: "",
     quote: "",
@@ -69,15 +81,13 @@ const RecipeForm = () => {
 
     // storing recipe in db
     try {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { image, ...formDataWithoutImage } = formData;
       await postRecipe({
         ...formDataWithoutImage,
         objectKey: data.objectKey,
-        user : userId,
+        user : userId || "",
       });
       router.push("/");
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       toast.error(ErrorMessages.SERVER_ERROR);
     } finally {

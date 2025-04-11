@@ -12,7 +12,7 @@ import { PrismaClient, User } from "@prisma/client";
 import { Session } from "inspector/promises";
 import { JWT } from "next-auth/jwt";
 import { MimeType } from "@/types";
-import { Account } from "next-auth";
+import { Account, NextAuthOptions } from "next-auth";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -20,7 +20,7 @@ export function cn(...inputs: ClassValue[]) {
 
 const prisma = new PrismaClient();
 
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || "",

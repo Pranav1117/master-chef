@@ -10,7 +10,7 @@ export default async function RecipeDetail({
 }) {
   const recipe = await getRecipeById(params.id);
 
-  if (!recipe.photos) {
+  if (!recipe?.photos) {
     return { ...recipe, imageUrl: null };
   }
 
@@ -22,11 +22,11 @@ export default async function RecipeDetail({
   if (!recipe) return notFound();
   return (
     <div className="min-h-screen flex flex-col items-center py-10 px-4 md:px-10 bg-gray-50">
-      <h1 className="text-4xl font-bold mb-4">{recipe.name}</h1>
+      <h1 className="text-4xl font-bold mb-4">{recipe.heading}</h1>
       <div className="w-full max-w-3xl">
         <img
           src={signedUrl}
-          alt={recipe.name}
+          alt={recipe.heading}
           width={600}
           height={400}
           className="rounded-lg shadow-md w-full object-cover"

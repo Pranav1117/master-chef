@@ -34,12 +34,12 @@ export default async function UserRecipes() {
         {recipesWithImages.length > 0 ? (
           recipesWithImages.slice(0, 4).map((item) => (
             // TODO=> add proper href after creating detail page for user uploaded recipes
-            <Link key={item.id} href={`/userrecipedetail/${item.id}`} prefetch={true}>
-              <SquareCard
-                title={item.heading}
-                image={item.imageUrl ?? ""}
-                alt="No preview available"
-              />
+            <Link
+              key={item.id}
+              href={`/userrecipedetail/${item.id}`}
+              prefetch={true}
+            >
+              <SquareCard title={item.heading} image={item.imageUrl ?? ""} />
             </Link>
           ))
         ) : (
